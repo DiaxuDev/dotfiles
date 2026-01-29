@@ -1,0 +1,221 @@
+/* css */ ''
+  :root {
+        /* Overwrite default variables */
+        --zen-primary-color: var(--color-blue-40) !important;
+        --zen-colors-border: rgba(255, 255, 255, 0.1) !important;
+
+        /* Custom variables used by userChrome */
+        --zen-tab-color: var(--zen-primary-color) /*#52A9FE*/;
+        --zen-tab-icon-size: 32px;
+
+    }
+
+    #titlebar {
+        /* I dislike the dimming */
+        --inactive-titlebar-opacity: 1 !important;
+    }
+
+    #zen-main-app-wrapper {
+        background: #292929 !important;
+    }
+
+    #zen-browser-background {
+        background: transparent !important;
+
+        &::before {
+            display: none !important;
+        }
+    }
+
+    /* --- ESSENTIAL TABS --- */
+    .tabbrowser-tab[zen-essential] {
+        --zen-essential-bg: var(--zen-primary-color);
+        --zen-essential-opacity: 15%;
+
+        .tab-background {
+          background-color: color-mix(in srgb, var(--zen-essential-bg) var(--zen-essential-opacity), transparent) !important;
+          border: 1px solid color-mix(in srgb, var(--zen-essential-bg) 60%, transparent) !important;
+          box-shadow: none !important;
+        }
+
+        &:is([selected], [multiselected]) {
+            --zen-essential-opacity: 30%;
+        }
+
+        &:not([selected], [multiselected]):hover {
+            --zen-essential-opacity: 20%;
+        }
+
+        /* Essential colors based on labels (you can even use regex - https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors) */
+        &[label*="Messenger"] {
+            --zen-essential-bg: var(--color-blue-70) /*Before 139: #0069CC*/;
+        }
+    }
+
+    /* --- WORKSPACES --- */
+    /* #zen-workspaces-button {
+        background-color: rgba(255, 255, 255, 0.05) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+
+        .subviewbutton {
+            filter: none !important;
+            transition: 0.3s !important;
+
+            &[active] {
+                background-color: rgba(255, 255, 255, 0.1) !important;
+                border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            }
+
+            &:hover {
+                background-color: rgba(255, 255, 255, 0.2) !important;
+            }
+        }
+    } */
+
+    /* --- TABS ---  */
+    /* Code shamelessly stolen and modified from https://github.com/itsmefen/Dark-Harmony */
+    .tabbrowser-tab:not([zen-essential]) {
+        --zen-tab-bg-transparency: 5%;
+        --zen-tab-outline-transparency: 20%;
+
+        .tab-background {
+            background-color: color-mix(in srgb, var(--zen-tab-color) var(--zen-tab-bg-transparency), transparent) !important;
+            border: 1px solid color-mix(in srgb, var(--zen-tab-color) var(--zen-tab-outline-transparency), transparent) !important;
+            border-left: var(--zen-tab-icon-size) solid color-mix(in srgb, var(--zen-tab-color) var(--zen-tab-outline-transparency), transparent) !important; /* 8px padding left + 16px favicon + 8px margin right */
+            border-radius: 4px !important;
+        }
+
+        .tab-icon-stack {
+            width: var(--zen-tab-icon-size) !important;
+            height: var(--zen-tab-icon-size) !important;
+
+            display: flex !important;
+            justify-content: center !important;
+            align-items: center !important;
+        }
+
+        .tab-content {
+            padding-left: 0 !important;
+            margin-left: 2px !important; /* tab-background has an additional 2px margin so we need to account for that */
+        }
+
+        .tab-icon-pending {
+            display: none !important;
+        }
+
+        .tab-icon-image, .tab-icon-overlay {
+          /* unset default margins since we handle positioning via flexbox */
+          margin: 0 !important;
+          inset: unset !important;
+        }
+
+        .tab-text {
+            margin-left: 6px !important;
+        }
+
+        .tab-close-button, .tab-reset-button {
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            border-radius: 5px !important;
+        }
+
+        .tab-icon-overlay {
+            padding: 0 !important;
+            background: none !important;
+
+            width: 20px !important;
+            height: 20px !important;
+
+            &:is([soundplaying], [muted]) {
+                display: block !important;
+            }
+
+            &[soundplaying] {
+                list-style-image: url("img/playing.gif") !important;
+            }
+
+            &[muted] {
+                list-style-image: url("img/muted.gif") !important;
+            }
+        }
+
+        &:is([selected], [visuallyselected], [multiselected]) {
+            --zen-tab-bg-transparency: 20%;
+            --zen-tab-outline-transparency: 40%;
+        }
+
+        &:is([soundplaying], [muted]) {
+            /* hide both the favicon and default audio icon */
+            .tab-icon-image, .tab-audio-button {
+                display: none !important;
+            }
+        }
+    }
+
+    tab-group {
+        position: relative !important;
+        display: block !important;
+
+        --label-height: 32px;
+
+        &::before {
+            content: "";
+            display: block;
+            position: absolute;
+            top: var(--label-height);
+            height: calc(100% - (var(--zen-tab-icon-size) / 2) - 6px - var(--label-height));
+            width: 1px;
+            background: var(--tab-group-color);
+        }
+
+        .tab-group-container {
+            margin-inline-start: 0 !important;
+        }
+
+        .tabbrowser-tab::before {
+            content: "" !important;;
+            height: 1px !important;
+            position: relative !important;
+            display: block !important;
+            width: 8px !important;
+            background: var(--tab-group-color) !important;
+            margin-top: calc(var(--zen-tab-icon-size) / 2) !important;
+            translate: 0 50% !important;
+        }
+
+        .tab-group-label-container {
+            padding: 0 !important;
+            margin-left: 0 !important;
+            margin-top: 0 !important;
+            height: var(--label-height) !important;
+            border-bottom: 1px solid var(--tab-group-color) !important;
+            background-color: color-mix(in srgb, var(--tab-group-color) 15%, transparent) !important;
+            justify-content: unset !important;
+
+            label {
+                background: none !important;
+                color: var(--tab-group-color-pale) !important;
+
+                height: 100% !important;
+                line-height: var(--label-height) !important;
+
+                outline: none !important;
+            }
+        }
+    }
+
+    /* --- MEDIA CONTROLS ---  */
+    #zen-media-controls-toolbar>toolbaritem {
+        background: rgba(0, 0, 0, 0.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    #urlbar:not([breakout-extend]) .urlbar-background {
+        background: rgba(0, 0, 0, 0.3) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    #urlbar[breakout-extend] .urlbar-background {
+        background: #161616 !important;
+        outline-color: rgba(255, 255, 255, 0.2) !important;
+    }
+''
