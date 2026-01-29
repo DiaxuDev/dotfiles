@@ -1,9 +1,8 @@
 { ... }:
 {
   imports = [
+    ./discord
     ./zen
     ./zed.nix
   ];
-
-  programs.vesktop.enable = true;
 }
