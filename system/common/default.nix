@@ -7,6 +7,7 @@
     ./nix.nix
     ./sound.nix
     ./users.nix
+    ./zsh.nix
   ];
 
   time.timeZone = "Europe/Warsaw";
