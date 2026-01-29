@@ -22,6 +22,8 @@
         gaps_out = 0;
       };
 
+      animations.enabled = false;
+
       bind = [
         "SUPER, return, exec, kitty"
         "SUPER, r, exec, rofi -show drun"
