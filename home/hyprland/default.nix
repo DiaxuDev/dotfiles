@@ -6,6 +6,7 @@ in
 {
   imports = [
     ./rofi.nix
+    ./screenshots.nix
     ./waybar.nix
   ];
 
