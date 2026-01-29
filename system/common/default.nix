@@ -3,6 +3,7 @@
   imports = [
     ./boot.nix
     ./connectivity.nix
+    ./fonts.nix
     ./hyprland.nix
     ./nix.nix
     ./sound.nix
@@ -12,8 +13,8 @@
 
   time.timeZone = "Europe/Warsaw";
 
-  # It's needed for boblox :(
-  services.flatpak.enable = true;
+  services.flatpak.enable = true; # It's needed for boblox :(
+  programs.dconf.enable = true;
 
   environment.systemPackages = with pkgs; [
     vim

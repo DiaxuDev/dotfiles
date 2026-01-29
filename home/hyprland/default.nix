@@ -1,4 +1,8 @@
-{ ... }:
+{ config, lib, ... }:
+let
+  inherit (lib.strings) removePrefix;
+  c = config.modules.colors;
+in
 {
   imports = [
     ./rofi.nix
@@ -20,6 +24,10 @@
       general = {
         gaps_in = 0;
         gaps_out = 0;
+
+        border_size = 1;
+        "col.inactive_border" = "rgb(${removePrefix "#" c.base03})";
+        "col.active_border" = "rgb(${removePrefix "#" c.base0B})";
       };
 
       animations.enabled = false;

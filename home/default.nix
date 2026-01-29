@@ -4,6 +4,7 @@
     ./hyprland
     ./programs
     ./terminal
+    ./style.nix
   ];
 
   home = {
