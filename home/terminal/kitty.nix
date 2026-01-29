@@ -5,7 +5,7 @@
 
     font = {
       size = 10;
-      name = "JetBrains Mono";
+      name = "JetBrainsMono NF";
     };
 
     settings =

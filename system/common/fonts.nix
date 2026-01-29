@@ -11,7 +11,7 @@
     fontconfig.defaultFonts = {
       serif = [ "Libertinus serif" ];
       sansSerif = [ "Noto Sans" ];
-      monospace = [ "JetBrains Mono Nerd Font" ];
+      monospace = [ "JetBrainsMono NF" ];
       emoji = [ "Noto Color Emoji" ];
     };
   };
