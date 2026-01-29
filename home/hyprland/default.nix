@@ -6,6 +6,7 @@ in
 {
   imports = [
     ./rofi.nix
+    ./waybar.nix
   ];
 
   wayland.windowManager.hyprland = {
@@ -20,6 +21,8 @@ in
       env = [
         "XDG_DATA_DIRS,$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share"
       ];
+
+      exec-once = [ "waybar" ];
 
       general = {
         gaps_in = 0;
