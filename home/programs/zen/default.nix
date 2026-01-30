@@ -10,7 +10,7 @@ in
 
     profiles.default = {
       settings = {
-        # needed for userChrome to work
+        # needed for the userChrome to work
         "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
         "devtools.debugger.remote-enabled" = true;
         "devtools.chrome.enabled" = true;
@@ -19,6 +19,8 @@ in
         "zen.theme.essentials-favicon-bg" = false;
         "zen.urlbar.show-domain-only-in-sidebar" = false;
         "zen.urlbar.replace-newtab" = false;
+
+        "browser.tabs.delayHidingAudioPlayingIconMS" = 300; # looks nicer with the custom userChrome
       };
 
       userChrome = import ./userChrome.nix;
