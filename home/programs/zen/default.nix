@@ -1,4 +1,7 @@
-{ inputs, ... }:
+{ inputs, config, ... }:
+let
+  cfg = config.programs.zen-browser;
+in
 {
   imports = [ inputs.zen-browser.homeModules.twilight ];
 
@@ -20,5 +23,9 @@
 
       userChrome = import ./userChrome.nix;
     };
+  };
+
+  home.file."${cfg.profilesPath}/default/chrome/img" = {
+    source = ./assets;
   };
 }
