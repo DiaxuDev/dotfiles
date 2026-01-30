@@ -18,6 +18,7 @@
 
   environment.systemPackages = with pkgs; [
     vim
+    prismlauncher
     home-manager
   ];
 
