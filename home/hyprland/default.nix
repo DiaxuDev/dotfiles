@@ -17,6 +17,12 @@ in
     package = null;
     portalPackage = null;
 
+    systemd = {
+      enable = true;
+      variables = [ "--all" ];
+      extraCommands = [ ]; # i prefer my way of handling this
+    };
+
     settings = {
       input.kb_layout = "pl";
 
@@ -24,10 +30,8 @@ in
         "XDG_DATA_DIRS,$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share"
       ];
 
-      exec-once = [
-        "waybar"
-        "vicinae server"
-      ];
+      exec-once = [ "systemctl --user start hyprland-session.target" ];
+      exec-shutdown = [ "systemctl --user stop hyprland-session.target" ];
 
       general = {
         gaps_in = 0;
