@@ -7,6 +7,7 @@ in
   imports = [
     ./rofi.nix
     ./screenshots.nix
+    ./vicinae.nix
     ./waybar.nix
   ];
 
@@ -23,7 +24,10 @@ in
         "XDG_DATA_DIRS,$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share"
       ];
 
-      exec-once = [ "waybar" ];
+      exec-once = [
+        "waybar"
+        "vicinae server"
+      ];
 
       general = {
         gaps_in = 0;
@@ -38,7 +42,7 @@ in
 
       bind = [
         "SUPER, return, exec, kitty"
-        "SUPER, r, exec, rofi -show drun"
+        "SUPER, r, exec, vicinae toggle"
         "SUPER, q, killactive"
 
         "SUPER, left, movefocus, l"
