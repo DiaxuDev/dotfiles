@@ -1,0 +1,16 @@
+{
+  "lsp": {
+    "nixd": {
+      "settings": {
+        "options": {
+          "nixos": {
+            "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.nixos.options",
+          },
+          "home-manager": {
+            "expr": "(builtins.getFlake (builtins.toString ./.)).homeConfigurations.diaxudev.options",
+          },
+        },
+      },
+    },
+  },
+}

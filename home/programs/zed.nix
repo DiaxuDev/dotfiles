@@ -2,9 +2,18 @@
 {
   programs.zed-editor = {
     enable = true;
-    userSettings.lsp = {
-      nixd.binary.path = lib.getExe pkgs.nixd;
-      nil.binary.path = lib.getExe pkgs.nil;
+    userSettings = {
+      languages = {
+        Nix = {
+          language_servers = [
+            "nixd"
+            "!nil"
+          ];
+        };
+      };
+      lsp = {
+        nixd.binary.path = lib.getExe pkgs.nixd;
+      };
     };
   };
 }
