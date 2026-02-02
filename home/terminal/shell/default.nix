@@ -1,6 +1,7 @@
 { config, ... }:
 {
   imports = [
+    ./plugins.nix
     ./starship.nix
   ];
 
@@ -9,11 +10,16 @@
 
     enableCompletion = true;
     autosuggestion.enable = true;
+    syntaxHighlighting.enable = true;
 
     dotDir = "${config.xdg.configHome}/zsh";
     history = {
       expireDuplicatesFirst = true;
       path = "${config.xdg.dataHome}/zsh_history";
+    };
+
+    shellAliases = {
+      ".." = "cd ..";
     };
   };
 }
