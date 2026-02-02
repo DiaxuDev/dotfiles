@@ -16,4 +16,6 @@
       };
     };
   };
+
+  home.packages = [ pkgs.nixfmt ]; # for an unknown reason nixd fails when the formatter is passed as a path instead of being available in the environment
 }

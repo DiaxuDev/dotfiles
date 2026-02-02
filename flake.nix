@@ -41,5 +41,7 @@
         extraSpecialArgs = { inherit inputs; };
         modules = [ ./home ];
       };
+
+      formatter.${system} = pkgs.nixfmt-tree; # TODO: use something like forAllSystems
     };
 }
