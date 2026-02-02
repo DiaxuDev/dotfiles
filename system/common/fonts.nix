@@ -1,4 +1,7 @@
-{ pkgs, ... }:
+{
+  pkgs,
+  ...
+}:
 {
   fonts = {
     enableDefaultPackages = false; # this adds a lot of ugly fonts that get matched before my fonts
