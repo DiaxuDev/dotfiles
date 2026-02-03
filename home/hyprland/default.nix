@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  pkgs,
   ...
 }:
 let
@@ -78,6 +79,26 @@ in
         "SUPER, down, movefocus, b"
       ]
       ++ workspaces;
+    };
+  };
+
+  home.packages = with pkgs; [
+    wl-clipboard
+  ];
+
+  systemd.user.services.wl-clip-persist = {
+    Unit = {
+      Description = "Persistent clipboard for Wayland";
+      PartOf = [ "graphical-session.target" ];
+      After = [ "graphical-session.target" ];
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = "${lib.getExe pkgs.wl-clip-persist} --clipboard regular";
+      Restart = "always";
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
     };
   };
 }
