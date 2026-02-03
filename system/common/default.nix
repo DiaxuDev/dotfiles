@@ -7,6 +7,7 @@
     ./hyprland.nix
     ./nix.nix
     ./sound.nix
+    ./steam.nix
     ./users.nix
     ./zsh.nix
   ];
