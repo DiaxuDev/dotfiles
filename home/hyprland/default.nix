@@ -43,7 +43,10 @@ in
     };
 
     settings = {
-      input.kb_layout = "pl";
+      input = {
+        kb_layout = "pl";
+        numlock_by_default = true;
+      };
 
       env = [
         "XDG_DATA_DIRS,$XDG_DATA_DIRS:/usr/share:/var/lib/flatpak/exports/share:$HOME/.local/share/flatpak/exports/share"
