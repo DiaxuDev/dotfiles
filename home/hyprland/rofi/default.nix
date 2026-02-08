@@ -1,4 +1,10 @@
 {
+  pkgs,
+  lib,
+  config,
+  ...
+}:
+{
   imports = [
     ./theme.nix
   ];
@@ -8,19 +14,30 @@
 
     theme = "theme";
     extraConfig = {
-      modi = "drun,run,filebrowser";
       case-sensitive = false;
       cycle = true;
       show-icons = true;
       font = "JetBrainsMono Nerd Font 10";
-
-      display-drun = "  Apps";
-      display-run = "  Run";
-      display-filebrowser = "  Files";
     };
   };
 
   wayland.windowManager.hyprland.settings = {
-    bind = [ "SUPER, r, exec, rofi -show drun" ];
+    bind =
+      let
+        callMenu =
+          path:
+          lib.getExe (
+            import path {
+              inherit pkgs;
+              theme = "${config.xdg.configHome}/rofi/menu.rasi";
+              genList = cols: "'listview {columns: ${toString cols}; lines: 1;}'";
+            }
+          );
+      in
+      [
+        "SUPER, r, exec, rofi -show drun"
+        "SUPER, escape, exec, ${callMenu ./power.nix}"
+        ", print, exec, ${callMenu ./screenshot.nix}"
+      ];
   };
 }
