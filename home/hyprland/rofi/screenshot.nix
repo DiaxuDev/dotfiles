@@ -5,7 +5,6 @@
 }:
 pkgs.writeShellApplication {
   name = "screenshot";
-  runtimeInputs = [ pkgs.grimblast ];
 
   text = ''
     # variables
