@@ -24,9 +24,8 @@ let
 in
 {
   imports = [
-    ./rofi.nix
+    ./rofi
     ./screenshots.nix
-    ./vicinae.nix
     ./waybar.nix
   ];
 
@@ -73,7 +72,6 @@ in
 
       bind = [
         "SUPER, return, exec, kitty"
-        "SUPER, r, exec, vicinae toggle"
         "SUPER, q, killactive"
 
         "SUPER, left, movefocus, l"

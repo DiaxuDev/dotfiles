@@ -14,12 +14,6 @@
         home-manager.follows = "home-manager";
       };
     };
-
-    vicinae.url = "github:vicinaehq/vicinae";
-    vicinae-extensions = {
-      url = "github:vicinaehq/extensions";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
   outputs =
     inputs@{
