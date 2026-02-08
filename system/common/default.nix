@@ -5,6 +5,7 @@
     ./connectivity.nix
     ./fonts.nix
     ./hyprland.nix
+    ./keyrings.nix
     ./nix.nix
     ./sound.nix
     ./steam.nix
