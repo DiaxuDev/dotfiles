@@ -6,6 +6,7 @@
     ./fonts.nix
     ./hyprland.nix
     ./keyrings.nix
+    ./locale.nix
     ./nix.nix
     ./sound.nix
     ./steam.nix

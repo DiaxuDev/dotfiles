@@ -25,6 +25,7 @@ in
         "zen.urlbar.replace-newtab" = false;
 
         "browser.tabs.delayHidingAudioPlayingIconMS" = 300; # looks nicer with the custom userChrome
+        "intl.regional_prefs.use_os_locales" = true;
       };
 
       userChrome = import ./userChrome.nix;
