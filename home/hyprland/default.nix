@@ -44,6 +44,7 @@ in
     settings = {
       input = {
         kb_layout = "pl";
+        kb_options = "kpdl:dot";
         numlock_by_default = true;
       };
 
