@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   imports = [
     ./discord
@@ -5,5 +6,9 @@
     ./calculator.nix
     ./thunderbird.nix
     ./zed.nix
+  ];
+
+  home.packages = with pkgs; [
+    spotify
   ];
 }
