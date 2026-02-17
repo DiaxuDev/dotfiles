@@ -25,6 +25,7 @@ in
 {
   imports = [
     ./rofi
+    ./hyprpaper.nix
     ./screenshots.nix
     ./waybar.nix
   ];
