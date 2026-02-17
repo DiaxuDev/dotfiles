@@ -1,0 +1,13 @@
+{ pkgs, ... }:
+{
+  programs.xfconf.enable = true;
+  services.tumbler.enable = true;
+  environment.systemPackages = with pkgs; [ file-roller ];
+
+  programs.thunar = {
+    enable = true;
+    plugins = with pkgs; [
+      thunar-archive-plugin
+    ];
+  };
+}

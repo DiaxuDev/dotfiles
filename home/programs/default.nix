@@ -4,6 +4,7 @@
     ./discord
     ./zen
     ./calculator.nix
+    ./media.nix
     ./thunderbird.nix
     ./zed.nix
   ];

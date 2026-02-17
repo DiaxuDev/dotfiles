@@ -73,6 +73,7 @@ in
 
       bind = [
         "SUPER, return, exec, kitty"
+        "SUPER, e, exec, thunar"
         "SUPER, q, killactive"
 
         "SUPER, left, movefocus, l"

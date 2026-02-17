@@ -10,6 +10,7 @@
     ./nix.nix
     ./sound.nix
     ./steam.nix
+    ./thunar.nix
     ./users.nix
     ./zsh.nix
   ];
