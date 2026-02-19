@@ -26,6 +26,7 @@ in
   imports = [
     ./rofi
     ./hyprpaper.nix
+    ./osd.nix
     ./screenshots.nix
     ./waybar.nix
   ];
