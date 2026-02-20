@@ -36,6 +36,10 @@
         modules = [ ./home ];
       };
 
+      packages.${system} = {
+        lyrecho = pkgs.callPackage ./pkgs/lyrecho { };
+      };
+
       formatter.${system} = pkgs.nixfmt-tree; # TODO: use something like forAllSystems
     };
 }
