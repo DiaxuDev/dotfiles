@@ -24,7 +24,10 @@
     vim
     prismlauncher
     home-manager
+    gpu-screen-recorder
   ];
+
+  programs.gpu-screen-recorder.enable = true;
 
   # It's here so that you don't wake up to 20 config errors after an update
   system.stateVersion = "25.11";
