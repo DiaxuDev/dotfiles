@@ -18,4 +18,6 @@
       TimeoutStopSec = 10;
     };
   };
+
+  security.pam.services.hyprlock = { };
 }
