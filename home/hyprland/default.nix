@@ -25,6 +25,7 @@ in
 {
   imports = [
     ./rofi
+    ./hypridle.nix
     ./hyprlock.nix
     ./hyprpaper.nix
     ./osd.nix

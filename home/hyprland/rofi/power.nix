@@ -48,7 +48,6 @@ pkgs.writeShellApplication {
           systemctl reboot
         elif [[ $1 == '--suspend' ]]; then
           systemctl suspend
-          hyprlock
         elif [[ $1 == '--logout' ]]; then
           hyprctl dispatch exit
         elif [[ $1 == '--lock' ]]; then
