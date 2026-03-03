@@ -1,6 +1,7 @@
 { config, ... }:
 {
   imports = [
+    ./direnv.nix
     ./plugins.nix
     ./starship.nix
   ];
