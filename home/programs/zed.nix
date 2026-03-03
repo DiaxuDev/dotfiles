@@ -7,6 +7,8 @@
   programs.zed-editor = {
     enable = true;
     userSettings = {
+      # there is literally a char made specifically for the purpose of indenting content, why do people insist on using spacecs
+      hard_tabs = true;
       languages = {
         Nix = {
           language_servers = [
