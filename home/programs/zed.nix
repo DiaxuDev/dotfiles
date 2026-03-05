@@ -9,6 +9,9 @@
     userSettings = {
       # there is literally a char made specifically for the purpose of indenting content, why do people insist on using spacecs
       hard_tabs = true;
+      load_direnv = "shell_hook";
+      diagnostics.inline.enabled = true;
+
       languages = {
         Nix = {
           language_servers = [
@@ -19,6 +22,7 @@
       };
       lsp = {
         nixd.binary.path = lib.getExe pkgs.nixd;
+        package-version-server.binary.path = lib.getExe pkgs.package-version-server;
       };
     };
   };
