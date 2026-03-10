@@ -8,6 +8,7 @@
     ./keyrings.nix
     ./locale.nix
     ./nix.nix
+    ./printing.nix
     ./sound.nix
     ./steam.nix
     ./thunar.nix
