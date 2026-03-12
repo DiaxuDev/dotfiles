@@ -13,6 +13,7 @@
     ./steam.nix
     ./thunar.nix
     ./users.nix
+    ./virtualization.nix
     ./zsh.nix
   ];
 
