@@ -13,6 +13,6 @@
   };
 
   wayland.windowManager.hyprland.settings = {
-    windowrule = [ "match:class com.gabm.satty, stay_focused on" ];
+    windowrule = [ "match:class com.gabm.satty, float on, stay_focused on" ];
   };
 }
