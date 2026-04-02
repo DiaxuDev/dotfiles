@@ -15,6 +15,7 @@
           ClearURLs.enabled = true;
           MessageClickActions.enabled = true;
           NoF1.enabled = true;
+          OpenInApp.enabled = true;
           QuickReply.enabled = true;
           TypingTweaks.enabled = true;
         };
