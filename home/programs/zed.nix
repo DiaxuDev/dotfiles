@@ -19,6 +19,9 @@
             "!nil"
           ];
         };
+        Rust = {
+          hard_tabs = false;
+        };
       };
       lsp = {
         nixd.binary.path = lib.getExe pkgs.nixd;
