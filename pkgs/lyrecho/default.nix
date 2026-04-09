@@ -12,8 +12,8 @@ buildGoModule (finalAttrs: {
   src = fetchFromGitHub {
     owner = "karol-broda";
     repo = "lyrecho";
-    rev = "3e305c42dd469338c2ce30734379cc6530f22005";
-    hash = "sha256-qATUzrJ3CxPXWUV5rzbnPe2iPogEOuMp+yKuL8cu8vA=";
+    rev = "0cdfc32969e38ccaef08758d86006362e6eb93dc";
+    hash = "sha256-Zv1WSYsdqVoEhXXtYA2U3tJnJVLFQ/af8rU6IM4Q2sI=";
   };
 
   vendorHash = "sha256-BiBIv02YIg66GtAnK6vZPMYOCRTU6NjpflAw4eSkoPA=";
