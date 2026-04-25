@@ -1,9 +1,8 @@
 { pkgs, ... }:
 {
   programs.hyprland.enable = true;
-  services.displayManager.sddm.enable = true;
-  services.displayManager.sddm.wayland.enable = true;
   environment.variables.NIXOS_OZONE_WL = "1";
+  services.displayManager.defaultSession = "hyprland";
 
   systemd.user.services.polkit-gnome-authentication-agent-1 = {
     description = "polkit-gnome-authentication-agent-1";

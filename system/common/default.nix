@@ -9,6 +9,7 @@
     ./locale.nix
     ./nix.nix
     ./printing.nix
+    ./sddm.nix
     ./sound.nix
     ./steam.nix
     ./thunar.nix
