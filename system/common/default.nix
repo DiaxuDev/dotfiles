@@ -4,6 +4,7 @@
     ./boot.nix
     ./connectivity.nix
     ./fonts.nix
+    ./home-manager.nix
     ./hyprland.nix
     ./keyrings.nix
     ./locale.nix

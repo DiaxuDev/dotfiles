@@ -28,12 +28,7 @@
     {
       nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
         modules = [ ./system/hosts/nixos.nix ];
-      };
-
-      homeConfigurations.diaxudev = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = { inherit inputs; };
-        modules = [ ./home ];
+        specialArgs = { inherit inputs; };
       };
 
       packages.${system} = {
