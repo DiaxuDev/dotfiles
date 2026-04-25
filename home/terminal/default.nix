@@ -9,6 +9,9 @@
 
   home.packages = with pkgs; [
     file # wdym it's not installed by default
+    jq
+    ripgrep
+    fd
     inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.lyrecho
   ];
 
