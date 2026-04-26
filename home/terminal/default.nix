@@ -2,11 +2,11 @@
 {
   imports = [
     ./shell
+    ./television
     ./btop.nix
     ./git.nix
     ./kitty.nix
     ./tealdeer.nix
-    ./television.nix
   ];
 
   home.packages = with pkgs; [
