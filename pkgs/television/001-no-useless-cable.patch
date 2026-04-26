@@ -1,0 +1,44 @@
+diff --git a/.config/config.toml b/.config/config.toml
+index 2e45f13..8cb8556 100644
+--- a/.config/config.toml
++++ b/.config/config.toml
+@@ -242,7 +242,6 @@ fallback_channel = "files"
+   "git push",
+ ]
+ "git-log" = ["git log", "git show"]
+-"docker-images" = ["docker run"]
+ "git-repos" = ["nvim", "code", "hx", "git clone"]
+ 
+ 
+diff --git a/television/cable.rs b/television/cable.rs
+index 1afebd4..2309e4f 100644
+--- a/television/cable.rs
++++ b/television/cable.rs
+@@ -200,15 +200,7 @@ where
+ 
+ #[cfg(unix)]
+ const DEFAULT_CABLE_FILES: &[(&str, &str)] = &[
+-    (
+-        "bash-history.toml",
+-        include_str!("../cable/unix/bash-history.toml"),
+-    ),
+     ("dirs.toml", include_str!("../cable/unix/dirs.toml")),
+-    (
+-        "docker-images.toml",
+-        include_str!("../cable/unix/docker-images.toml"),
+-    ),
+     ("env.toml", include_str!("../cable/unix/env.toml")),
+     ("files.toml", include_str!("../cable/unix/files.toml")),
+     (
+diff --git a/television/config/shell_integration.rs b/television/config/shell_integration.rs
+index 73c2930..1ccc895 100644
+--- a/television/config/shell_integration.rs
++++ b/television/config/shell_integration.rs
+@@ -74,7 +74,6 @@ static DEFAULT_CHANNEL_TRIGGERS: &[(&str, &[&str])] = &[
+         ],
+     ),
+     ("git-log", &["git log", "git show"]),
+-    ("docker-images", &["docker run"]),
+     ("git-repos", &["nvim", "code", "hx", "git clone"]),
+ ];
+ 
