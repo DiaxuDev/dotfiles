@@ -18,7 +18,6 @@
   outputs =
     inputs@{
       nixpkgs,
-      home-manager,
       ...
     }:
     let
