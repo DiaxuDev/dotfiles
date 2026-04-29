@@ -4,7 +4,10 @@
       "nix-command"
       "flakes"
     ];
+
     auto-optimise-store = true;
+    keep-derivations = true;
+    keep-outputs = true;
 
     substituters = [
       "https://cache.nixos.org?priority=10"
