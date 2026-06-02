@@ -4,7 +4,7 @@
     ./boot.nix
     ./connectivity.nix
     ./fonts.nix
-    ./home-manager.nix
+    ./hjem.nix
     ./hyprland.nix
     ./keyrings.nix
     ./locale.nix
@@ -27,7 +27,6 @@
   environment.systemPackages = with pkgs; [
     vim
     prismlauncher
-    home-manager
     gpu-screen-recorder
   ];
 
