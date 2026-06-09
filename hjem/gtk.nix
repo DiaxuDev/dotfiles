@@ -8,6 +8,8 @@ let
     gtk-theme-name = themeName;
     gtk-icon-theme-name = iconThemeName;
     gtk-application-prefer-dark-theme = true;
+    gtk-cursor-theme-name = "Banana";
+    gtk-cursor-theme-size = 40;
   };
 in
 {
