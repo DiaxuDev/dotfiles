@@ -32,6 +32,7 @@
 
   programs.gpu-screen-recorder.enable = true;
   programs.localsend.enable = true;
+  services.udisks2.enable = true;
 
   # It's here so that you don't wake up to 20 config errors after an update
   system.stateVersion = "25.11";
