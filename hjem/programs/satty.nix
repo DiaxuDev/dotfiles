@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ lib, pkgs, ... }:
 {
   hj = {
     packages = [ pkgs.satty ];
@@ -8,8 +8,7 @@
       value = {
         general = {
           early-exit = true;
-          copy-command = "wl-copy"; # needed for wl-clip-persist to work with early-exit
-          default-hide-toolbars = true;
+          copy-command = "${lib.getExe' pkgs.wl-clipboard "wl-copy"}";
         };
       };
     };
