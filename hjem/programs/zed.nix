@@ -1,7 +1,11 @@
 { lib, pkgs, ... }:
 {
   hj = {
-    packages = [ pkgs.zed-editor ];
+    # for an unknown reason nixd refuses to accept my custom formatter command so nixfmt is here as a workaround
+    packages = with pkgs; [
+      zed-editor
+      nixfmt
+    ];
 
     xdg.config.files."zed/settings.json" = {
       generator = lib.generators.toJSON { };
@@ -27,7 +31,6 @@
         lsp = {
           nixd = {
             binary.path = lib.getExe pkgs.nixd;
-            initialization_options.formatting.command = lib.getExe pkgs.nixfmt;
           };
           package-version-server.binary.path = lib.getExe pkgs.package-version-server;
         };
