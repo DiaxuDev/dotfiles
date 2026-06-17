@@ -1,4 +1,4 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 {
   services.printing = {
     enable = true;
@@ -16,6 +16,9 @@
   };
 
   services.udev.packages = [ pkgs.sane-airscan ];
-  users.users.diaxudev.extraGroups = [ "scanner" "lp" ];
+  users.users.diaxudev.extraGroups = [
+    "scanner"
+    "lp"
+  ];
   environment.systemPackages = [ pkgs.kdePackages.skanpage ];
 }
