@@ -22,10 +22,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
-      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-        modules = [ ./system/hosts/nixos.nix ];
-        specialArgs = { inherit inputs; };
-      };
+      nixosConfigurations = import ./hosts inputs;
 
       packages.${system} = {
         lyrecho = pkgs.callPackage ./pkgs/lyrecho { };
