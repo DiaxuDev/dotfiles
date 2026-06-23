@@ -1,13 +1,13 @@
 {
-	"lsp": {
-		"nixd": {
-			"settings": {
-				"options": {
-					"nixos": {
-						"expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.nixos.options",
-					},
-				},
-			},
-		},
-	},
+  "lsp": {
+    "nixd": {
+      "settings": {
+        "options": {
+          "nixos": {
+            "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.nixos.options",
+          },
+        },
+      },
+    },
+  },
 }

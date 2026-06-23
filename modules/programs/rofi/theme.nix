@@ -59,8 +59,8 @@ in
           margin:                      0px;
           padding:                     14px 20px;
           border-radius:               8px;
-          border-color: 		           @border;
-          border:			                 1px;
+          border-color:                @border;
+          border:                      1px;
           background-color:            @background-alt;
           text-color:                  @selected;
           children:                    [ "textbox-prompt-colon", "entry" ];
@@ -145,8 +145,8 @@ in
           handle-width:                3px;
           handle-color:                @selected;
           border-radius:               10px;
-          border-color: 		           @border;
-          border:			                 1px;
+          border-color:                @border;
+          border:                      1px;
           background-color:            @background-alt;
       }
 
@@ -164,15 +164,15 @@ in
       element normal.normal {
           background-color:            @background-alt;
           text-color:                  @selected;
-          border-color:		             @border;
-          border:			                 1px;
+          border-color:                @border;
+          border:                      1px;
       }
 
       element alternate.normal {
           background-color:            @background-alt;
           text-color:                  @selected;
-          border-color:		             @border;
-          border:			                 1px;
+          border-color:                @border;
+          border:                      1px;
       }
 
       element selected.normal {
@@ -183,15 +183,15 @@ in
       element normal.urgent {
           background-color:            @background-alt;
           text-color:                  @urgent;
-          border-color:		             @border;
-          border:			                 1px;
+          border-color:                @border;
+          border:                      1px;
       }
 
       element alternate.urgent {
           background-color:            @background-alt;
           text-color:                  @urgent;
-          border-color:		             @border;
-          border:			                 1px;
+          border-color:                @border;
+          border:                      1px;
       }
 
       element selected.urgent {
@@ -202,15 +202,15 @@ in
       element normal.active {
           background-color:            @background-alt;
           text-color:                  @selected;
-          border-color:		             @border;
-          border:			                 1px;
+          border-color:                @border;
+          border:                      1px;
       }
 
       element alternate.active {
           background-color:            @background-alt;
           text-color:                  @selected;
-          border-color:		             @border;
-          border:			                 1px;
+          border-color:                @border;
+          border:                      1px;
       }
 
       element selected.active {
@@ -241,8 +241,8 @@ in
       button {
           padding:                     0px 20px 0px 20px;
           border-radius:               8px;
-          border-color:		             @border;
-          border:			                 1px;
+          border-color:                @border;
+          border:                      1px;
           background-color:            @background-alt;
           text-color:                  inherit;
           vertical-align:              0.5;
@@ -259,8 +259,8 @@ in
           enabled:                     true;
           margin:                      0px;
           padding:                     0px;
-          border-color:	        	     @border;
-          border:			                 1px;
+          border-color:                @border;
+          border:                      1px;
           border-radius:               8px;
           background-color:            transparent;
           text-color:                  @selected;

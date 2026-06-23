@@ -7,13 +7,13 @@
 {
   hj = {
     xdg.config.files."hypr/hyprpaper.conf".text = ''
-      	wallpaper {
-          monitor=
-          path=~/Pictures/snow_runner.png
-       }
-       splash=true
-       splash_offset=40
-       splash_opacity=1
+      wallpaper {
+         monitor=
+         path=~/Pictures/snow_runner.png
+      }
+      splash=true
+      splash_offset=40
+      splash_opacity=1
     '';
 
     systemd.services.hyprpaper = {
