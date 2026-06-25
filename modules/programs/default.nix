@@ -7,6 +7,7 @@
     ./terminal
     ./zen
     ./calculator.nix
+    ./imv.nix
     ./kitty.nix
     ./satty.nix
     ./steam.nix
@@ -23,7 +24,6 @@
 
   hj.packages = with pkgs; [
     spotify
-    imv
     mpv
   ];
 }
