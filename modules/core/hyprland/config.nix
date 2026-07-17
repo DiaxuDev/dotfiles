@@ -82,7 +82,6 @@ in
 
         hl.bind("SUPER + return", hl.dsp.exec_raw("kitty"))
         hl.bind("SUPER + e", hl.dsp.exec_raw("thunar"))
-        hl.bind("SUPER + r", hl.dsp.exec_raw("rofi -show drun"))
 
         hl.bind("SUPER + q", hl.dsp.window.close())
 
