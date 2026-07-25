@@ -1,7 +1,10 @@
-{ config, ... }:
+{ inputs, config, ... }:
 {
   nix = {
     channel.enable = false;
+    registry = {
+      nixpkgs.flake = inputs.nixpkgs;
+    };
     settings = {
       experimental-features = [
         "nix-command"
@@ -12,6 +15,7 @@
       keep-derivations = true;
       keep-outputs = true;
       use-xdg-base-directories = true;
+      flake-registry = ""; # disable default registry file
 
       substituters = [ "https://cache.nixos.org?priority=10" ];
       trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
