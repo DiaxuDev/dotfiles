@@ -17,7 +17,9 @@
       enable = true;
       defaultNetwork.settings.dns_enabled = true;
     };
-    containers.registries.search = [ "docker.io" ];
+    containers.registries.settings.registries = {
+      search.registries = [ "docker.io" ];
+    };
   };
 
   networking.firewall.trustedInterfaces = [ "virbr0" ];
