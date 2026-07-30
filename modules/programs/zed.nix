@@ -18,6 +18,11 @@
         load_direnv = "shell_hook";
         diagnostics.inline.enabled = true;
         format_on_save = "on";
+        telemetry = {
+          diagnostics = false;
+          metrics = false;
+        };
+        git_panel.tree_view = true;
         languages = {
           Nix = {
             language_servers = [
