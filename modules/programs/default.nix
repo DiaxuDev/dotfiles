@@ -25,5 +25,7 @@
   hj.packages = with pkgs; [
     spotify
     mpv
+    inkscape
+    yt-dlp
   ];
 }
