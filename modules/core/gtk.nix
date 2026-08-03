@@ -1,10 +1,16 @@
 { lib, pkgs, ... }:
 let
-  # themePkg = pkgs.gruvbox-gtk-theme;
+  themePkg = pkgs.colloid-gtk-theme.override {
+    themeVariants = [ "green" ];
+    tweaks = [
+      "gruvbox"
+    ];
+  };
+  themeName = "Colloid-Green-Dark-Gruvbox";
   iconThemeName = "Papirus-Dark";
 
   Settings = {
-    # gtk-theme-name = themeName;
+    gtk-theme-name = themeName;
     gtk-icon-theme-name = iconThemeName;
     gtk-application-prefer-dark-theme = true;
     gtk-cursor-theme-name = "Banana";
@@ -15,7 +21,7 @@ in
   hj = {
     packages = [
       pkgs.papirus-icon-theme
-      # themePkg
+      themePkg
     ];
 
     xdg.config.files = {
@@ -27,9 +33,9 @@ in
         generator = lib.generators.toINI { };
         value = { inherit Settings; };
       };
-      # "gtk-4.0/gtk.css".text = ''
-      #   @import url("file://${themePkg}/share/themes/${themeName}/gtk-4.0/gtk.css")
-      # '';
+      "gtk-4.0/gtk.css".text = ''
+        @import url("file://${themePkg}/share/themes/${themeName}/gtk-4.0/gtk.css")
+      '';
     };
   };
 
@@ -40,7 +46,7 @@ in
         lockAll = true;
         settings = {
           "org/gnome/desktop/interface" = {
-            # gtk-theme = themeName;
+            gtk-theme = themeName;
             icon-theme = iconThemeName;
             color-scheme = "prefer-dark";
           };
