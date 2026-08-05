@@ -9,6 +9,7 @@ let
 in
 {
   imports = [
+    ./aliases.nix
     ./options.nix
     ./plugins.nix
   ];
