@@ -6,5 +6,7 @@
     setopt EXTENDED_HISTORY
     setopt HIST_IGNORE_SPACE
     HISTFILE=${config.hj.xdg.data.directory}/zsh_history
+
+    zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
   '';
 }
