@@ -26,6 +26,7 @@
     spotify
     mpv
     inkscape
+    gimp
     yt-dlp
   ];
 }
