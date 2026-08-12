@@ -135,10 +135,11 @@
       serviceConfig = {
         Type = "simple";
         Restart = "always";
-        ExecStart = "${lib.getExe pkgs.waybar}";
+        ExecStart = lib.getExe pkgs.waybar;
+        ExecReload = "${lib.getExe' pkgs.coreutils "kill"} -SIGUSR2 $MAINPID";
       };
       path = [ pkgs.hyprland ];
-      restartTriggers = [
+      reloadTriggers = [
         config.hj.xdg.config.files."waybar/config".source
         config.hj.xdg.config.files."waybar/style.css".source
       ];

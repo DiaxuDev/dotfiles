@@ -65,8 +65,9 @@ in
         Type = "dbus";
         BusName = "org.freedesktop.Notifications";
         ExecStart = lib.getExe pkgs.dunst;
+        ExecReload = "${lib.getExe' pkgs.dunst "dunstctl"} reload";
       };
-      restartTriggers = [
+      reloadTriggers = [
         config.hj.xdg.config.files."dunst/dunstrc".source
       ];
     };
