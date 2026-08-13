@@ -15,6 +15,7 @@ let
 
   power = callMenu ./power.nix;
   screenshot = callMenu ./screenshot.nix;
+  wallpapers = callMenu ./wallpapers.nix;
 in
 {
   cfg.hyprland.binds = [
@@ -30,5 +31,20 @@ in
       key = "SHIFT+print";
       exec = ''hl.dsp.exec_raw("${screenshot} edit")'';
     }
+  ];
+
+  hj.packages = [
+    (pkgs.makeDesktopItem {
+      name = "change-wallpaper";
+      desktopName = "Change wallpaper";
+      comment = "Open wallpaper picker";
+      icon = "preferences-desktop-wallpaper";
+      categories = [ "Settings" ];
+      keywords = [
+        "background"
+        "wallpaper"
+      ];
+      exec = wallpapers;
+    })
   ];
 }

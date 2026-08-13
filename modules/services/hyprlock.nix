@@ -22,7 +22,7 @@
         }
 
         background {
-          path=~/Pictures/snow_runner.png
+          path=~/.local/state/wallpaper
         }
 
         image {
