@@ -1,0 +1,26 @@
+From dcc862103f68668c5ce64875c02021e3982ffc2c Mon Sep 17 00:00:00 2001
+From: DiaxuDev <diaxudev@gmail.com>
+Date: Thu, 13 Aug 2026 15:15:48 +0200
+Subject: [PATCH 3/4] ipc: display correct error for the set command when no
+ args were passed
+
+---
+ src/ipc.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/ipc.c b/src/ipc.c
+index 4206fd9..b1132ea 100644
+--- a/src/ipc.c
++++ b/src/ipc.c
+@@ -190,7 +190,7 @@ static int handle_command(chroma_state_t *state, int client_fd,
+     return send_response(client_fd, IPC_RESP_OK);
+   }
+ 
+-  if (strncmp(command, "set ", 4) == 0) {
++  if (strncmp(command, "set ", 4) == 0 || strcmp(command, "set") == 0) {
+     char output_name[256];
+     char image_path[MAX_PATH_LEN];
+     if (parse_set_command(command, output_name, sizeof(output_name), image_path,
+-- 
+2.55.0
+

@@ -1,9 +1,9 @@
 {
   imports = [
+    ./chroma.nix
     ./dunst.nix
     ./hypridle.nix
     ./hyprlock.nix
-    ./hyprpaper.nix
     ./keyring.nix
     ./osd.nix
     ./playerctl.nix

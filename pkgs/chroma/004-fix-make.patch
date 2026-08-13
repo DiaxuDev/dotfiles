@@ -1,0 +1,48 @@
+From 06c375844d1f85e1fa40a0f5187eeb143ec7d816 Mon Sep 17 00:00:00 2001
+From: DiaxuDev <diaxudev@gmail.com>
+Date: Thu, 13 Aug 2026 17:16:21 +0200
+Subject: [PATCH 5/5] build: fix version-header causing unnecessary
+ recompilations
+
+---
+ Makefile | 24 ++++++++++++++++--------
+ 1 file changed, 16 insertions(+), 8 deletions(-)
+
+diff --git a/Makefile b/Makefile
+index 3c3f53b..6827afe 100644
+--- a/Makefile
++++ b/Makefile
+@@ -143,14 +143,22 @@ uninstall:
+ # Create version header
+ version-header:
+ 	@echo "Generating version header..."
+-	@echo "#ifndef CHROMA_VERSION_H" > $(INCDIR)/chroma_version.h
+-	@echo "#define CHROMA_VERSION_H" >> $(INCDIR)/chroma_version.h
+-	@echo "" >> $(INCDIR)/chroma_version.h
+-	@echo "#ifndef CHROMA_VERSION" >> $(INCDIR)/chroma_version.h
+-	@echo "#define CHROMA_VERSION \"$(VERSION)\"" >> $(INCDIR)/chroma_version.h
+-	@echo "#endif" >> $(INCDIR)/chroma_version.h
+-	@echo "" >> $(INCDIR)/chroma_version.h
+-	@echo "#endif // CHROMA_VERSION_H" >> $(INCDIR)/chroma_version.h
++	@echo "#ifndef CHROMA_VERSION_H" > $(INCDIR)/chroma_version.h.tmp
++	@echo "#define CHROMA_VERSION_H" >> $(INCDIR)/chroma_version.h.tmp
++	@echo "" >> $(INCDIR)/chroma_version.h.tmp
++	@echo "#ifndef CHROMA_VERSION" >> $(INCDIR)/chroma_version.h.tmp
++	@echo "#define CHROMA_VERSION \"$(VERSION)\"" >> $(INCDIR)/chroma_version.h.tmp
++	@echo "#endif" >> $(INCDIR)/chroma_version.h.tmp
++	@echo "" >> $(INCDIR)/chroma_version.h.tmp
++	@echo "#endif // CHROMA_VERSION_H" >> $(INCDIR)/chroma_version.h.tmp
++
++	@if [ ! -f $(INCDIR)/chroma_version.h ] || ! cmp -s $(INCDIR)/chroma_version.h.tmp $(INCDIR)/chroma_version.h; then \
++		mv $(INCDIR)/chroma_version.h.tmp $(INCDIR)/chroma_version.h;\
++		echo "Version header updated"; \
++	else \
++		rm -f $(INCDIR)/chroma_version.h.tmp; \
++		echo "Version header unchanged. Skipped"; \
++	fi
+ 
+ # Create systemd service file
+ systemd-service: $(SYSTEMD_DIR)/$(PROJECT_NAME).service
+-- 
+2.55.0
+

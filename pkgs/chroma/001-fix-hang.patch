@@ -1,0 +1,51 @@
+From 1027e8d1f2dcbc339d8c8f041207d8463a10a090 Mon Sep 17 00:00:00 2001
+From: DiaxuDev <diaxudev@gmail.com>
+Date: Thu, 13 Aug 2026 12:16:10 +0200
+Subject: [PATCH 1/4] fix: prevent wl_display_read_events from blocking by
+ ensuring wl_display_cancel_read always gets called
+
+---
+ src/core.c | 16 +++++++---------
+ 1 file changed, 7 insertions(+), 9 deletions(-)
+
+diff --git a/src/core.c b/src/core.c
+index 948e682..697d8ea 100644
+--- a/src/core.c
++++ b/src/core.c
+@@ -342,6 +342,12 @@ int chroma_run(chroma_state_t *state) {
+       break;
+     }
+ 
++    // Handle IPC events
++    if (ipc_fd >= 0 && select_result > 0 && FD_ISSET(ipc_fd, &readfds)) {
++      chroma_ipc_process(state);
++      select_result--;
++    }
++
+     if (select_result == 0) {
+       // Timeout - check for animation/transition needs
+       wl_display_cancel_read(state->display);
+@@ -350,19 +356,11 @@ int chroma_run(chroma_state_t *state) {
+       continue;
+     }
+ 
+-    // Handle IPC events
+-    if (ipc_fd >= 0 && FD_ISSET(ipc_fd, &readfds)) {
+-      chroma_ipc_process(state);
+-      select_result--;
+-    }
+-
+     // Handle Wayland events
+-    if (select_result > 0 && FD_ISSET(fd, &readfds)) {
++    if (FD_ISSET(fd, &readfds)) {
+       if (process_wayland_events(state) != CHROMA_OK) {
+         break;
+       }
+-    } else if (select_result > 0) {
+-      wl_display_cancel_read(state->display);
+     }
+   }
+ 
+-- 
+2.55.0
+

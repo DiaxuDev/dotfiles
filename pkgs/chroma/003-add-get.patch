@@ -1,0 +1,107 @@
+From 8e0c0d104b4dd9b1d6791df977a551ecdd2301e5 Mon Sep 17 00:00:00 2001
+From: DiaxuDev <diaxudev@gmail.com>
+Date: Thu, 13 Aug 2026 15:16:44 +0200
+Subject: [PATCH 4/4] ipc: add get and get_all commands
+
+---
+ chroma.toml.sample |  2 ++
+ src/ipc.c          | 63 ++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 65 insertions(+)
+
+diff --git a/chroma.toml.sample b/chroma.toml.sample
+index 33eda55..8f2f08a 100644
+--- a/chroma.toml.sample
++++ b/chroma.toml.sample
+@@ -87,6 +87,8 @@ max_fps = 30              # Maximum animation frame rate
+ #   echo "clear rrggbb" | nc -U /tmp/chroma.sock
+ #   echo "reload" | nc -U /tmp/chroma.sock
+ #   echo "ping" | nc -U /tmp/chroma.sock
++#   echo "get DP-1" | nc -U /tmp/chroma.sock
++#   echo "get_all" | nc -U /tmp/chroma.sock
+ [ipc]
+ enable = false
+ socket_path = "/tmp/chroma.sock"
+diff --git a/src/ipc.c b/src/ipc.c
+index b1132ea..bca971b 100644
+--- a/src/ipc.c
++++ b/src/ipc.c
+@@ -14,6 +14,32 @@
+ #define IPC_RESP_OK "ok\n"
+ #define IPC_RESP_ERR "err %s\n"
+ 
++static int parse_get_command(const char *cmd, char *output_name,
++                             size_t name_sz) {
++  char action[64];
++  int n = sscanf(cmd, "%63s", action);
++  if (n != 1)
++    return -1;
++
++  if (strcmp(action, "get") == 0) {
++    const char *rest = cmd + 4;
++    while (*rest == ' ')
++      rest++;
++
++    const char *name_start = rest;
++    while (*rest && *rest != '\n' && *rest != '\r')
++      rest++;
++    size_t name_len = (size_t)(rest - name_start);
++    if (name_len == 0 || name_len >= name_sz)
++      return -1;
++    memcpy(output_name, name_start, name_len);
++    output_name[name_len] = '\0';
++    return 0;
++  }
++
++  return -1;
++}
++
+ static int parse_set_command(const char *cmd, char *output_name, size_t name_sz,
+                              char *image_path, size_t path_sz) {
+   char action[64];
+@@ -178,6 +204,43 @@ static int handle_command(chroma_state_t *state, int client_fd,
+     return send_response(client_fd, IPC_RESP_OK);
+   }
+ 
++  if (strcmp(command, "get_all") == 0) {
++    char result[(256 + 2 + MAX_PATH_LEN) * MAX_OUTPUTS];
++    result[0] = '\0';
++
++    size_t offset = 0;
++    for (int i = 0; i < state->output_count; i++) {
++      chroma_output_t *output = &state->outputs[i];
++      int written = snprintf(result + offset, sizeof(result) - offset,
++                             "%s: %s\n", output->name, output->image->path);
++      if (written < 0 || (size_t)written >= sizeof(result) - offset) {
++        break;
++      }
++
++      offset += (size_t)written;
++    }
++
++    return send_response(client_fd, result);
++  }
++
++  if (strncmp(command, "get ", 4) == 0 || strcmp(command, "get") == 0) {
++    char output_name[256];
++    if (parse_get_command(command, output_name, sizeof(output_name)) != 0) {
++      return send_response(client_fd, "err invalid syntax\n");
++    }
++
++    chroma_output_t *output = chroma_output_find_by_name(state, output_name);
++
++    if (!output) {
++      return send_response(client_fd, "err invalid_output\n");
++    }
++
++    char image_path[MAX_PATH_LEN + 1];
++    sprintf(image_path, "%s\n", output->image->path);
++
++    return send_response(client_fd, image_path);
++  }
++
+   if (strncmp(command, "set_all ", 8) == 0 || strcmp(command, "set_all") == 0) {
+     char image_path[MAX_PATH_LEN];
+     if (parse_set_all_command(command, image_path, sizeof(image_path)) != 0) {
+-- 
+2.55.0
+
