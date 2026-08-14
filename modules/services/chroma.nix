@@ -34,7 +34,7 @@
         Type = "simple";
         Restart = "always";
         ExecStart = lib.getExe inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.chroma;
-        ExecReload = "kill -HUP $MAINPID";
+        ExecReload = "${lib.getExe' pkgs.coreutils "kill"} -SIGHUP $MAINPID";
       };
       reloadTriggers = [
         config.hj.xdg.config.files."chroma/chroma.toml".source
