@@ -11,6 +11,7 @@
       generator = (pkgs.formats.toml { }).generate "chroma.toml";
       value = {
         default_image = "~/.local/state/wallpaper";
+        canonicalize_paths = true;
         max_output_width = 1920;
         max_output_height = 1080;
         transition = {
@@ -64,7 +65,7 @@
                 monitor=$(hyprctl monitors -j | jq 'first(.[] | select(.focused)).name' -r)
                 current=$(echo "get $monitor" | nc -U /tmp/chroma.sock)
 
-                case $(basename "$(readlink -f "$current")") in
+                case $(basename "$current") in
                     "diaxuchan.png")
                         new="diaxuchan_alt.png"
                         ;;

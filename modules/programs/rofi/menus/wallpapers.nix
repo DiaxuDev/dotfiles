@@ -21,10 +21,6 @@ pkgs.writeShellApplication {
 
     wall_file=''${XDG_STATE_HOME:=$HOME/.local/state}/wallpaper
     ln -sf "$dir/$choice" "$wall_file"
-    # we set it to the actual file and not the symlink because chroma
-    # doesn't recognize it as a new file and therefore doesn't actually set
-    # the image
-    # TODO: fix this in chroma
-    echo "set_all $dir/$choice" | nc -U /tmp/chroma.sock
+    echo "set_all $wall_file" | nc -U /tmp/chroma.sock
   '';
 }
