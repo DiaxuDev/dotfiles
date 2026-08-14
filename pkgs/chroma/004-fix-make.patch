@@ -1,7 +1,7 @@
 From 06c375844d1f85e1fa40a0f5187eeb143ec7d816 Mon Sep 17 00:00:00 2001
 From: DiaxuDev <diaxudev@gmail.com>
 Date: Thu, 13 Aug 2026 17:16:21 +0200
-Subject: [PATCH 5/7] build: fix version-header causing unnecessary
+Subject: [PATCH 5/8] build: fix version-header causing unnecessary
  recompilations
 
 ---

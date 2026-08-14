@@ -1,7 +1,7 @@
 From cb61dbc6b4a7bb22746c8076d0d71c8881fdc0f7 Mon Sep 17 00:00:00 2001
 From: DiaxuDev <diaxudev@gmail.com>
 Date: Fri, 14 Aug 2026 10:14:05 +0200
-Subject: [PATCH 6/7] fix: remove doubled memset from chroma_init causing
+Subject: [PATCH 6/8] fix: remove doubled memset from chroma_init causing
  previously set state fields to reset
 
 ---

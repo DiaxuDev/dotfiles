@@ -24,6 +24,7 @@ stdenv.mkDerivation {
     ./004-fix-make.patch
     ./005-fix-double-memset.patch
     ./006-fix-use-slots.patch
+    ./007-canonicalize_paths.patch
   ];
 
   nativeBuildInputs = [

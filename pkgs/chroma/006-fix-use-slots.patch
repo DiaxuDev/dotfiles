@@ -1,7 +1,7 @@
 From e219f77b7f4f7e19c80bcc1578e38568f668d5e9 Mon Sep 17 00:00:00 2001
 From: DiaxuDev <diaxudev@gmail.com>
 Date: Fri, 14 Aug 2026 11:22:41 +0200
-Subject: [PATCH 7/7] image: use existing empty slots for new images
+Subject: [PATCH 7/8] image: use existing empty slots for new images
 
 ---
  src/image.c | 7 +++++++

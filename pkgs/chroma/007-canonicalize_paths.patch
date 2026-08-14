@@ -1,0 +1,203 @@
+From b74c368f56e8df13965b16220b59076d028fab62 Mon Sep 17 00:00:00 2001
+From: DiaxuDev <diaxudev@gmail.com>
+Date: Fri, 14 Aug 2026 15:25:59 +0200
+Subject: [PATCH 8/8] config: add canonicalize_paths
+
+---
+ chroma.toml.sample |  6 ++++++
+ include/chroma.h   |  8 ++++----
+ src/config.c       | 16 +++++++++++++---
+ src/ipc.c          |  6 ++++--
+ src/utils.c        | 23 +++++++++++++++++++----
+ 5 files changed, 46 insertions(+), 13 deletions(-)
+
+diff --git a/chroma.toml.sample b/chroma.toml.sample
+index 8f2f08a..dee2084 100644
+--- a/chroma.toml.sample
++++ b/chroma.toml.sample
+@@ -28,6 +28,12 @@ default_image = "~/.config/chroma/default.jpg"
+ # Usually set via command line option --daemon, but can be set here too
+ daemon_mode = false
+ 
++# Whether to resolve symlinks when parsing paths
++# This only affects ipc commands like "get" and "get_all"
++# and whether chroma should treat existing symlink pointing to a new file as a new file
++# Disabling this doesn't mean that images from symlink won't be read
++canonicalize_paths = true
++
+ # Global scaling mode for wallpapers (used as default for all outputs)
+ # Options: fill, fit, stretch, center
+ #   fill    - Fill entire output, crop if necessary (default)
+diff --git a/include/chroma.h b/include/chroma.h
+index 08ff520..09d2a44 100644
+--- a/include/chroma.h
++++ b/include/chroma.h
+@@ -153,6 +153,7 @@ typedef struct {
+   int mapping_count;
+   char default_image[MAX_PATH_LEN];
+   bool daemon_mode;
++  bool canonicalize_paths;
+ 
+   // Global scaling and filtering settings (used as defaults)
+   chroma_scale_mode_t default_scale_mode;
+@@ -239,8 +240,8 @@ chroma_output_t *chroma_output_find_by_id(chroma_state_t *state, uint32_t id);
+ chroma_output_t *chroma_output_find_by_name(chroma_state_t *state,
+                                             const char *name);
+ // Output methods
+-int32_t chroma_output_width(chroma_output_t* output);
+-int32_t chroma_output_height(chroma_output_t* output);
++int32_t chroma_output_width(chroma_output_t *output);
++int32_t chroma_output_height(chroma_output_t *output);
+ 
+ // Output event handlers
+ void chroma_output_geometry(void *data, struct wl_output *output, int32_t x,
+@@ -256,7 +257,6 @@ void chroma_output_description(void *data, struct wl_output *output,
+                                const char *description);
+ void chroma_output_done(void *data, struct wl_output *output);
+ 
+-
+ // Rendering and surface management
+ int chroma_surface_create(chroma_state_t *state, chroma_output_t *output);
+ void chroma_surface_destroy(chroma_output_t *output);
+@@ -368,7 +368,7 @@ void chroma_set_log_level(int level);
+ int chroma_get_log_level(void);
+ void chroma_set_signal_state(chroma_state_t *state, const char *config_file);
+ void chroma_cleanup_signals(void);
+-char *chroma_expand_path(const char *path);
++char *chroma_expand_path(const char *path, const bool canonicalize);
+ int chroma_mkdir_recursive(const char *path, mode_t mode);
+ char *chroma_get_config_dir(void);
+ bool chroma_path_exists(const char *path);
+diff --git a/src/config.c b/src/config.c
+index 82b447b..8463540 100644
+--- a/src/config.c
++++ b/src/config.c
+@@ -236,10 +236,18 @@ int chroma_config_load_toml(chroma_config_t *config, const char *config_file) {
+ 
+   chroma_log("INFO", "Loading TOML configuration from: %s", config_file);
+ 
++  // Parse canonicalize_paths
++  toml_datum_t canonicalize_paths =
++      toml_seek(result.toptab, "canonicalize_paths");
++  if (canonicalize_paths.type == TOML_BOOLEAN) {
++    config->canonicalize_paths = canonicalize_paths.u.boolean;
++  }
++
+   // Parse default_image
+   toml_datum_t default_image = toml_seek(result.toptab, "default_image");
+   if (default_image.type == TOML_STRING) {
+-    char *expanded_path = chroma_expand_path(default_image.u.s);
++    char *expanded_path =
++        chroma_expand_path(default_image.u.s, config->canonicalize_paths);
+     const char *path_to_use = expanded_path ? expanded_path : default_image.u.s;
+     if (strlen(path_to_use) < sizeof(config->default_image)) {
+       strcpy(config->default_image, path_to_use);
+@@ -303,7 +311,7 @@ int chroma_config_load_toml(chroma_config_t *config, const char *config_file) {
+     }
+     toml_datum_t i_socket = toml_seek(ipc, "socket_path");
+     if (i_socket.type == TOML_STRING) {
+-      char *expanded = chroma_expand_path(i_socket.u.s);
++      char *expanded = chroma_expand_path(i_socket.u.s, false);
+       if (expanded) {
+         strncpy(config->ipc_socket_path, expanded,
+                 sizeof(config->ipc_socket_path) - 1);
+@@ -402,7 +410,8 @@ int chroma_config_load_toml(chroma_config_t *config, const char *config_file) {
+         continue;
+       }
+ 
+-      char *expanded_path = chroma_expand_path(image.u.s);
++      char *expanded_path =
++          chroma_expand_path(image.u.s, config->canonicalize_paths);
+       const char *path_to_use = expanded_path ? expanded_path : image.u.s;
+ 
+       // Get optional settings with defaults from global config
+@@ -470,6 +479,7 @@ static void init_default_config(chroma_config_t *config) {
+ 
+   memset(config, 0, sizeof(chroma_config_t));
+ 
++  config->canonicalize_paths = true;
+   config->daemon_mode = false;
+   config->mapping_count = 0;
+ 
+diff --git a/src/ipc.c b/src/ipc.c
+index bca971b..f5d01f8 100644
+--- a/src/ipc.c
++++ b/src/ipc.c
+@@ -414,7 +414,8 @@ int chroma_set_wallpaper_for_output(chroma_state_t *state,
+     return CHROMA_ERROR_INIT;
+   }
+ 
+-  char *expanded = chroma_expand_path(image_path);
++  char *expanded =
++      chroma_expand_path(image_path, state->config.canonicalize_paths);
+   const char *path = expanded ? expanded : image_path;
+ 
+   if (!chroma_path_exists(path)) {
+@@ -484,7 +485,8 @@ int chroma_set_wallpaper_for_all(chroma_state_t *state,
+     return CHROMA_ERROR_INIT;
+   }
+ 
+-  char *expanded = chroma_expand_path(image_path);
++  char *expanded =
++      chroma_expand_path(image_path, state->config.canonicalize_paths);
+   const char *path = expanded ? expanded : image_path;
+ 
+   if (!chroma_path_exists(path)) {
+diff --git a/src/utils.c b/src/utils.c
+index 3eeb360..3cce780 100644
+--- a/src/utils.c
++++ b/src/utils.c
+@@ -208,7 +208,7 @@ static char *expand_env_vars(const char *str) {
+ }
+ 
+ // Expand tilde and environment variables in path
+-char *chroma_expand_path(const char *path) {
++char *chroma_expand_path(const char *path, const bool canonicalize) {
+   if (!path) {
+     return NULL;
+   }
+@@ -221,7 +221,12 @@ char *chroma_expand_path(const char *path) {
+ 
+   // Then expand tilde if present
+   if (env_expanded[0] != '~') {
+-    return env_expanded;
++    if (!canonicalize)
++      return env_expanded;
++
++    char *canonicalized = realpath(env_expanded, NULL);
++    free(env_expanded);
++    return canonicalized;
+   }
+ 
+   const char *home;
+@@ -255,7 +260,12 @@ char *chroma_expand_path(const char *path) {
+     }
+ 
+     free(env_expanded);
+-    return expanded;
++    if (!canonicalize)
++      return expanded;
++
++    char *canonicalized = realpath(expanded, NULL);
++    free(expanded);
++    return canonicalized;
+   } else {
+     // ~user/...
+     const char *slash = strchr(env_expanded, '/');
+@@ -296,7 +306,12 @@ char *chroma_expand_path(const char *path) {
+     }
+ 
+     free(env_expanded);
+-    return expanded;
++    if (!canonicalize)
++      return expanded;
++
++    char *canonicalized = realpath(expanded, NULL);
++    free(expanded);
++    return canonicalized;
+   }
+ }
+ 
+-- 
+2.55.0
+

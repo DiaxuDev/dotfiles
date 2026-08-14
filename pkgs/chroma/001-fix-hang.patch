@@ -1,7 +1,7 @@
 From 1027e8d1f2dcbc339d8c8f041207d8463a10a090 Mon Sep 17 00:00:00 2001
 From: DiaxuDev <diaxudev@gmail.com>
 Date: Thu, 13 Aug 2026 12:16:10 +0200
-Subject: [PATCH 1/7] fix: prevent wl_display_read_events from blocking by
+Subject: [PATCH 1/8] fix: prevent wl_display_read_events from blocking by
  ensuring wl_display_cancel_read always gets called
 
 ---
