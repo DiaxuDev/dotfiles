@@ -1,0 +1,30 @@
+From e219f77b7f4f7e19c80bcc1578e38568f668d5e9 Mon Sep 17 00:00:00 2001
+From: DiaxuDev <diaxudev@gmail.com>
+Date: Fri, 14 Aug 2026 11:22:41 +0200
+Subject: [PATCH 7/7] image: use existing empty slots for new images
+
+---
+ src/image.c | 7 +++++++
+ 1 file changed, 7 insertions(+)
+
+diff --git a/src/image.c b/src/image.c
+index bafcf0e..5b962bf 100644
+--- a/src/image.c
++++ b/src/image.c
+@@ -449,6 +449,13 @@ chroma_image_t *chroma_image_get_or_load(chroma_state_t *state,
+ 
+   // Find empty slot or reuse existing
+   chroma_image_t *image = existing;
++  for (int i = 0; i < state->image_count; i++) {
++    if (!state->images[i].loaded) {
++      image = &state->images[i];
++      chroma_log("DEBUG", "Using existing slot: %d", i);
++      break;
++    }
++  }
+   if (!image) {
+     if (state->image_count >= MAX_OUTPUTS) {
+       chroma_log("ERROR", "Maximum number of images reached");
+-- 
+2.55.0
+

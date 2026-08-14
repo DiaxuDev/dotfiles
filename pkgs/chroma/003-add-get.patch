@@ -1,7 +1,7 @@
 From 8e0c0d104b4dd9b1d6791df977a551ecdd2301e5 Mon Sep 17 00:00:00 2001
 From: DiaxuDev <diaxudev@gmail.com>
 Date: Thu, 13 Aug 2026 15:16:44 +0200
-Subject: [PATCH 4/4] ipc: add get and get_all commands
+Subject: [PATCH 4/7] ipc: add get and get_all commands
 
 ---
  chroma.toml.sample |  2 ++

@@ -1,7 +1,7 @@
 From dcc862103f68668c5ce64875c02021e3982ffc2c Mon Sep 17 00:00:00 2001
 From: DiaxuDev <diaxudev@gmail.com>
 Date: Thu, 13 Aug 2026 15:15:48 +0200
-Subject: [PATCH 3/4] ipc: display correct error for the set command when no
+Subject: [PATCH 3/7] ipc: display correct error for the set command when no
  args were passed
 
 ---
