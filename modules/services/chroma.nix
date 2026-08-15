@@ -12,11 +12,9 @@
       value = {
         default_image = "~/.local/state/wallpaper";
         canonicalize_paths = true;
-        max_output_width = 1920;
-        max_output_height = 1080;
         transition = {
           enable = true;
-          duration_ms = 300;
+          duration_ms = 800;
         };
         animation.enable = false;
         ipc = {
