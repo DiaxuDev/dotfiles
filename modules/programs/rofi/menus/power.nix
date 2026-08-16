@@ -1,13 +1,13 @@
 {
-  pkgs,
+  writeShellApplication,
+  procps,
   rofiCmd,
-  ...
 }:
-pkgs.writeShellApplication {
+writeShellApplication {
   name = "powermenu";
 
   # why are there two uptime versions on linux dawg i spent 10 minutes debugging this shit
-  runtimeInputs = [ pkgs.procps ];
+  runtimeInputs = [ procps ];
 
   text = ''
     # variables

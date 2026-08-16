@@ -11,25 +11,25 @@ let
     mesg: cols:
     ''rofi -dmenu -mesg "${mesg}" -theme-str 'listview {columns: ${toString cols}; lines: 1;}' -theme ${themePath}'';
 
-  callMenu = path: lib.getExe (import path { inherit pkgs rofiCmd config; });
+  callMenu = lib.callPackageWith (pkgs // { inherit rofiCmd; });
 
-  power = callMenu ./power.nix;
-  screenshot = callMenu ./screenshot.nix;
-  wallpapers = callMenu ./wallpapers.nix;
+  power = callMenu ./power.nix { };
+  screenshot = callMenu ./screenshot.nix { borderColor = config.cfg.meta.colors.base0B; };
+  wallpapers = callMenu ./wallpapers.nix { };
 in
 {
   cfg.hyprland.binds = [
     {
       key = "SUPER + escape";
-      exec = ''hl.dsp.exec_raw("${power}")'';
+      exec = ''hl.dsp.exec_raw("${lib.getExe power}")'';
     }
     {
       key = "print";
-      exec = ''hl.dsp.exec_raw("${screenshot} copy")'';
+      exec = ''hl.dsp.exec_raw("${lib.getExe screenshot} copy")'';
     }
     {
       key = "SHIFT+print";
-      exec = ''hl.dsp.exec_raw("${screenshot} edit")'';
+      exec = ''hl.dsp.exec_raw("${lib.getExe screenshot} edit")'';
     }
   ];
 
@@ -44,7 +44,7 @@ in
         "background"
         "wallpaper"
       ];
-      exec = wallpapers;
+      exec = lib.getExe wallpapers;
     })
   ];
 }

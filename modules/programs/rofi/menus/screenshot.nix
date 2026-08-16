@@ -1,12 +1,19 @@
 {
-  pkgs,
+  writeShellApplication,
+  hyprland,
+  jq,
+  grim,
+  slurp,
+  still,
+  wl-clipboard,
   rofiCmd,
-  config,
+
+  borderColor ? "#000000ff",
 }:
-pkgs.writeShellApplication {
+writeShellApplication {
   name = "screenshot";
 
-  runtimeInputs = with pkgs; [
+  runtimeInputs = [
     hyprland
     jq
     grim
@@ -38,7 +45,7 @@ pkgs.writeShellApplication {
                 grim -t png -T "$window" -
                 ;;
             "$area")
-                still -c "slurp -b '#000000aa' -s '#00000000' -c '${config.cfg.meta.colors.base0B}' | grim -t png -g- -"
+                still -c "slurp -b '#000000aa' -s '#00000000' -c '${borderColor}' | grim -t png -g- -"
                 ;;
         esac
     }

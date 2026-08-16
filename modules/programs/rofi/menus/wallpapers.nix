@@ -1,12 +1,15 @@
-{ pkgs, ... }:
+{
+  writeShellApplication,
+  netcat,
+}:
 let
   exclude = [ "diaxuchan_alt.png" ];
   extraFindArgs = builtins.concatStringsSep " " (map (file: "! -name '${file}'") exclude);
 in
-pkgs.writeShellApplication {
+writeShellApplication {
   name = "change-wallpaper";
 
-  runtimeInputs = with pkgs; [
+  runtimeInputs = [
     netcat
   ];
 
