@@ -1,5 +1,5 @@
 {
-  inputs,
+  inputs',
   lib,
   pkgs,
   config,
@@ -32,7 +32,7 @@
       serviceConfig = {
         Type = "simple";
         Restart = "always";
-        ExecStart = lib.getExe inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.chroma;
+        ExecStart = lib.getExe inputs'.self.packages.chroma;
         ExecReload = "${lib.getExe' pkgs.coreutils "kill"} -SIGHUP $MAINPID";
       };
       reloadTriggers = [

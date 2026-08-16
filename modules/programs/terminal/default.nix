@@ -1,4 +1,4 @@
-{ inputs, pkgs, ... }:
+{ inputs', pkgs, ... }:
 {
   imports = [
     ./television
@@ -18,6 +18,6 @@
     fd
     bat
     eza
-    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.lyrecho
+    inputs'.self.packages.lyrecho
   ];
 }

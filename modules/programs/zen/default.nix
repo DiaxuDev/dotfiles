@@ -1,12 +1,11 @@
 {
-  inputs,
+  inputs',
   lib,
-  pkgs,
   ...
 }:
 {
   hj = {
-    packages = [ inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.twilight ];
+    packages = [ inputs'.zen-browser.packages.twilight ];
 
     xdg.config.files = {
       "zen/profiles.ini" = {

@@ -1,4 +1,10 @@
-{ inputs, config, ... }:
+{
+  inputs,
+  lib,
+  pkgs,
+  config,
+  ...
+}:
 {
   nix = {
     channel.enable = false;
@@ -33,4 +39,11 @@
       extraArgs = "--keep 3 --keep-since 7d";
     };
   };
+
+  _module.args.inputs' =
+    let
+      system = pkgs.stdenv.hostPlatform.system;
+      transposed = [ "packages" ];
+    in
+    builtins.mapAttrs (_: input: lib.genAttrs transposed (name: input.${name}.${system})) inputs;
 }

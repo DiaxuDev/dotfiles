@@ -1,5 +1,5 @@
 {
-  inputs,
+  inputs',
   lib,
   pkgs,
   ...
@@ -13,7 +13,7 @@ let
 in
 {
   hj = {
-    packages = [ inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.television ];
+    packages = [ inputs'.self.packages.television ];
 
     xdg.config.files = genAttrs' cableFiles (
       cable:
