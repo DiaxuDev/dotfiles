@@ -11,7 +11,7 @@ let
     mesg: cols:
     ''rofi -dmenu -mesg "${mesg}" -theme-str 'listview {columns: ${toString cols}; lines: 1;}' -theme ${themePath}'';
 
-  callMenu = path: lib.getExe (import path { inherit pkgs rofiCmd; });
+  callMenu = path: lib.getExe (import path { inherit pkgs rofiCmd config; });
 
   power = callMenu ./power.nix;
   screenshot = callMenu ./screenshot.nix;

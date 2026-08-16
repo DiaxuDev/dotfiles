@@ -1,6 +1,7 @@
 {
   pkgs,
   rofiCmd,
+  ...
 }:
 pkgs.writeShellApplication {
   name = "powermenu";

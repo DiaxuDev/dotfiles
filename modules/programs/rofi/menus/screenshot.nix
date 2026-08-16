@@ -1,12 +1,18 @@
 {
   pkgs,
   rofiCmd,
+  config,
 }:
 pkgs.writeShellApplication {
   name = "screenshot";
 
   runtimeInputs = with pkgs; [
-    grimblast
+    hyprland
+    jq
+    grim
+    slurp
+    still
+    wl-clipboard
   ];
 
   text = ''
@@ -16,28 +22,37 @@ pkgs.writeShellApplication {
     area="󰏫"
 
     run_rofi() {
-      echo -e "$area\n$window\n$full" | ${rofiCmd "Screenshot" 3}
+        echo -e "$area\n$window\n$full" | ${rofiCmd "Screenshot" 3}
     }
 
-    case $(run_rofi) in
-      "$full")
-        target='output'
-        ;;
-      "$window")
-          target='active'
-          ;;
-      "$area")
-          target="area"
-          ;;
-    esac
+    screenshot() {
+        case $(run_rofi) in
+            "$full")
+                local output
+                output=$(hyprctl monitors -j | jq 'first(.[] | select(.focused)).name' -r)
+                grim -t png -o "$output" -
+                ;;
+            "$window")
+                local window
+                window=$(hyprctl activewindow -j | jq '.stableId' -r)
+                grim -t png -T "$window" -
+                ;;
+            "$area")
+                still -c "slurp -b '#000000aa' -s '#00000000' -c '${config.cfg.meta.colors.base0B}' | grim -t png -g- -"
+                ;;
+        esac
+    }
 
     case $1 in
-      edit)
-        grimblast save "$target" - | satty --filename -
-        ;;
-      copy)
-        grimblast copy "$target"
-        ;;
+        edit)
+            screenshot | satty --filename -
+            ;;
+        copy)
+            screenshot | wl-copy
+            ;;
+        *)
+            echo "Usage: $0 <edit | copy>"
+            exit 1
     esac
   '';
 }
