@@ -1,6 +1,7 @@
 {
   lib,
   pkgs,
+  config,
   ...
 }:
 {
@@ -46,6 +47,20 @@
     {
       key = "XF86AudioPlay";
       exec = ''hl.dsp.exec_raw("swayosd-client --playerctl play-pause")'';
+    }
+  ]
+  ++ lib.optionals config.cfg.meta.isLaptop [
+    {
+      key = "XF86AudioMicMute";
+      exec = ''hl.dsp.exec_raw("swayosd-client --input-volume mute-toggle")'';
+    }
+    {
+      key = "XF86MonBrightnessUp";
+      exec = ''hl.dsp.exec_raw("swayosd-client --brightness +10")'';
+    }
+    {
+      key = "XF86MonBrightnessDown";
+      exec = ''hl.dsp.exec_raw("swayosd-client --brightness -10")'';
     }
   ];
 }
