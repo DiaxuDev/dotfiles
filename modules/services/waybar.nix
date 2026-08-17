@@ -22,6 +22,12 @@
           "custom/label-cpu"
           "memory"
           "custom/label-mem"
+        ]
+        ++ lib.optionals config.cfg.meta.isLaptop [
+          "battery"
+          "custom/label-bat"
+        ]
+        ++ [
           "tray"
           "clock"
         ];
@@ -53,6 +59,16 @@
 
         "custom/label-mem" = {
           format = "MEM";
+          tooltip = false;
+        };
+
+        "battery" = {
+          format = "{capacity}%";
+          format-charging = "󱐋{capacity}%";
+        };
+
+        "custom/label-bat" = {
+          format = "BAT";
           tooltip = false;
         };
 
@@ -116,13 +132,13 @@
           border-radius: 10px;
         }
 
-        #cpu, #memory {
+        #cpu, #memory, #battery {
           margin: 0;
           padding: 0;
           color: ${c.base0B};
         }
 
-        #custom-label-cpu, #custom-label-mem {
+        #custom-label-cpu, #custom-label-mem, #custom-label-bat {
           margin-right: 12px;
         }
       '';
