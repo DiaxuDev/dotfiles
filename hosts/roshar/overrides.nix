@@ -8,5 +8,12 @@
     ACTION=="add", SUBSYSTEM=="pci", ATTR{vendor}=="0x1022", ATTR{device}=="0x1483", ATTR{power/wakeup}="disabled"
   '';
 
-  cfg.hardware.nvidia.enable = true;
+  cfg = {
+    hardware.nvidia.enable = true;
+    programs = {
+      steam.enable = true;
+      prismlauncher.enable = true;
+    };
+    virtualisation.libvirt.enable = true;
+  };
 }
