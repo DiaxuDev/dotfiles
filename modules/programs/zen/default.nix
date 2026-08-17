@@ -25,7 +25,7 @@
       };
 
       "zen/default/user.js".text =
-        lib.concatMapAttrsStringSep "\n" (name: value: ''user_pref("${name}", ${builtins.toJSON value})'')
+        lib.concatMapAttrsStringSep "\n" (name: value: ''user_pref("${name}", ${builtins.toJSON value});'')
           {
             # needed for the userChrome to work
             "toolkit.legacyUserProfileCustomizations.stylesheets" = true;
