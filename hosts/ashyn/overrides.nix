@@ -1,0 +1,5 @@
+{
+  cfg = {
+    meta.isLaptop = true;
+  };
+}
