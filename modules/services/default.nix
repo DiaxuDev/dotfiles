@@ -1,6 +1,5 @@
 {
   imports = [
-    ./chroma.nix
     ./dunst.nix
     ./hypridle.nix
     ./hyprlock.nix
@@ -10,6 +9,7 @@
     ./polkit.nix
     ./waybar.nix
     ./wl-clip-persist.nix
+    ./wpaperd.nix
   ];
 
   services.udisks2.enable = true;

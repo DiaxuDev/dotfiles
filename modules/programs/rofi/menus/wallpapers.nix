@@ -1,6 +1,6 @@
 {
   writeShellApplication,
-  netcat,
+  wpaperd,
 }:
 let
   exclude = [ "diaxuchan_alt.png" ];
@@ -10,7 +10,7 @@ writeShellApplication {
   name = "change-wallpaper";
 
   runtimeInputs = [
-    netcat
+    wpaperd
   ];
 
   text = ''
@@ -24,6 +24,6 @@ writeShellApplication {
 
     wall_file=''${XDG_STATE_HOME:=$HOME/.local/state}/wallpaper
     ln -sf "$dir/$choice" "$wall_file"
-    echo "set_all $wall_file" | nc -U /tmp/chroma.sock
+    wpaperctl set "$wall_file"
   '';
 }

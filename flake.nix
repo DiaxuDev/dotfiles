@@ -32,7 +32,6 @@
       packages.${system} = {
         lyrecho = pkgs.callPackage ./pkgs/lyrecho { };
         television = pkgs.callPackage ./pkgs/television { };
-        chroma = pkgs.callPackage ./pkgs/chroma { };
       };
 
       formatter.${system} = pkgs.nixfmt-tree; # TODO: use something like forAllSystems

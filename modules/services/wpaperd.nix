@@ -1,5 +1,4 @@
 {
-  inputs',
   lib,
   pkgs,
   config,
@@ -7,24 +6,18 @@
 }:
 {
   hj = {
-    xdg.config.files."chroma/chroma.toml" = {
-      generator = (pkgs.formats.toml { }).generate "chroma.toml";
+    xdg.config.files."wpaperd/config.toml" = {
+      generator = (pkgs.formats.toml { }).generate "config.toml";
       value = {
-        default_image = "~/.local/state/wallpaper";
-        canonicalize_paths = true;
-        transition = {
-          enable = true;
-          duration_ms = 800;
-        };
-        animation.enable = false;
-        ipc = {
-          enable = true;
-          socket_path = "/tmp/chroma.sock";
+        default = {
+          path = "~/.local/state/wallpaper";
+          transition-time = 800;
+          transition.directional-scaled = { };
         };
       };
     };
 
-    systemd.services.chroma = {
+    systemd.services.wpaperd = {
       description = "Wallpaper service for Wayland";
       after = [ "graphical-session.target" ];
       wantedBy = [ "graphical-session.target" ];
@@ -32,11 +25,10 @@
       serviceConfig = {
         Type = "simple";
         Restart = "always";
-        ExecStart = lib.getExe inputs'.self.packages.chroma;
-        ExecReload = "${lib.getExe' pkgs.coreutils "kill"} -SIGHUP $MAINPID";
+        ExecStart = lib.getExe pkgs.wpaperd;
       };
-      reloadTriggers = [
-        config.hj.xdg.config.files."chroma/chroma.toml".source
+      restartTriggers = [
+        config.hj.xdg.config.files."wpaperd/config.toml".source
       ];
     };
   };
@@ -55,15 +47,15 @@
             script = pkgs.writeShellApplication {
               name = "toggle-wallpaper";
               runtimeInputs = with pkgs; [
-                netcat
-                jq
                 hyprland
+                jq
+                wpaperd
               ];
               text = ''
                 monitor=$(hyprctl monitors -j | jq 'first(.[] | select(.focused)).name' -r)
-                current=$(echo "get $monitor" | nc -U /tmp/chroma.sock)
+                current=$(wpaperctl get "$monitor")
 
-                case $(basename "$current") in
+                case $(basename "$(readlink -f "$current")") in
                     "diaxuchan.png")
                         new="diaxuchan_alt.png"
                         ;;
@@ -75,7 +67,7 @@
                         ;;
                 esac
 
-                echo "set $monitor ~/.local/share/wallpapers/$new" | nc -U /tmp/chroma.sock
+                wpaperctl set "$HOME/.local/share/wallpapers/$new"
               '';
             };
           in
