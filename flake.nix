@@ -23,17 +23,17 @@
       ...
     }:
     let
-      system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      systems = [ "x86_64-linux" ];
+      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
       nixosConfigurations = import ./hosts inputs;
 
-      packages.${system} = {
+      packages = forAllSystems (pkgs: {
         lyrecho = pkgs.callPackage ./pkgs/lyrecho { };
         television = pkgs.callPackage ./pkgs/television { };
-      };
+      });
 
-      formatter.${system} = pkgs.nixfmt-tree; # TODO: use something like forAllSystems
+      formatter = forAllSystems (pkgs: pkgs.nixfmt-tree);
     };
 }
