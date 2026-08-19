@@ -24,7 +24,6 @@ in
   config = {
     programs.zsh.enable = true;
     users.users.${config.cfg.meta.username}.shell = pkgs.zsh;
-    environment.pathsToLink = [ "/share/zsh" ];
 
     hj = {
       files.".zshenv".text = ''
