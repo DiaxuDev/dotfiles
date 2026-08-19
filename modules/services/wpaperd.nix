@@ -1,5 +1,6 @@
 {
   lib,
+  lib',
   pkgs,
   config,
   ...
@@ -17,11 +18,8 @@
       };
     };
 
-    systemd.services.wpaperd = {
+    systemd.services.wpaperd = lib'.mkGraphicalService {
       description = "Wallpaper service for Wayland";
-      after = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
         Restart = "always";

@@ -1,5 +1,6 @@
 {
   lib,
+  lib',
   pkgs,
   config,
   ...
@@ -15,11 +16,8 @@
       };
     };
 
-    systemd.services.swayosd = {
+    systemd.services.swayosd = lib'.mkGraphicalService {
       description = "SwayOSD daemon";
-      after = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
         Restart = "always";

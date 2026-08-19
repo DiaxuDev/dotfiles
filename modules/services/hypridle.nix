@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  lib',
   pkgs,
   ...
 }:
@@ -14,11 +15,8 @@
       }
     '';
 
-    systemd.services.hypridle = {
+    systemd.services.hypridle = lib'.mkGraphicalService {
       description = "Hypridle service";
-      after = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
         Restart = "always";

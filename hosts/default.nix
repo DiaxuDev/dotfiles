@@ -8,7 +8,10 @@ let
   mkHost =
     name:
     nixosSystem {
-      specialArgs = { inherit inputs; };
+      specialArgs = {
+        inherit inputs;
+        lib' = inputs.self.lib;
+      };
       modules = [
         { networking.hostName = name; }
         ../modules

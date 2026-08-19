@@ -1,6 +1,7 @@
 {
   config,
   lib,
+  lib',
   pkgs,
   ...
 }:
@@ -143,11 +144,8 @@
         }
       '';
 
-    systemd.services.waybar = {
+    systemd.services.waybar = lib'.mkGraphicalService {
       description = "Waybar bar";
-      after = [ "graphical-session.target" ];
-      wantedBy = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
       serviceConfig = {
         Type = "simple";
         Restart = "always";

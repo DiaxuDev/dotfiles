@@ -1,4 +1,8 @@
 {
+  lib',
+  ...
+}:
+{
   # GPG
   programs.gnupg.agent.enable = true;
 
@@ -8,11 +12,8 @@
   security.pam.services.login.enableGnomeKeyring = true;
 
   # taken from fazzi's config
-  hj.systemd.services.gnome-keyring = {
+  hj.systemd.services.gnome-keyring = lib'.mkGraphicalService {
     description = "GNOME Keyring Daemon";
-    after = [ "graphical-session.target" ];
-    wantedBy = [ "graphical-session.target" ];
-    partOf = [ "graphical-session.target" ];
     serviceConfig = {
       Type = "simple";
       Restart = "always";

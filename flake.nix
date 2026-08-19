@@ -29,6 +29,8 @@
     {
       nixosConfigurations = import ./hosts inputs;
 
+      lib = import ./lib nixpkgs.lib;
+
       packages = forAllSystems (pkgs: {
         lyrecho = pkgs.callPackage ./pkgs/lyrecho { };
         television = pkgs.callPackage ./pkgs/television { };

@@ -1,5 +1,6 @@
 {
   lib,
+  lib',
   config,
   pkgs,
   ...
@@ -57,10 +58,9 @@ in
       };
     };
 
-    systemd.services.dunst = {
+    systemd.services.dunst = lib'.mkGraphicalService {
       description = "Dunst notification service";
-      after = [ "graphical-session.target" ];
-      partOf = [ "graphical-session.target" ];
+      wantedBy = [ ]; # explicitly disable wantedBy since it's dbus activated
       serviceConfig = {
         Type = "dbus";
         BusName = "org.freedesktop.Notifications";
