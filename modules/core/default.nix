@@ -3,6 +3,7 @@
     ./hardware
     ./hyprland
     ./boot.nix
+    ./dirs.nix
     ./fonts.nix
     ./gtk.nix
     ./hjem.nix
