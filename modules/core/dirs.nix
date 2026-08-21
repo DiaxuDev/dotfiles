@@ -17,6 +17,7 @@ in
         xdg = config.hj.xdg;
       in
       {
+        CUDA_CACHE_PATH = "${xdg.cache.directory}/nv";
         CARGO_HOME = "${xdg.data.directory}/cargo";
         LESSHISTFILE = "${xdg.data.directory}/less/history";
         GNUPGHOME = "${xdg.data.directory}/gnupg";
