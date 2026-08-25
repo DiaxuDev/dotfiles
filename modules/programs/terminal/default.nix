@@ -20,4 +20,11 @@
     eza
     inputs'.self.packages.lyrecho
   ];
+
+  programs.nano.enable = false;
+  programs.neovim = {
+    enable = true;
+    defaultEditor = true;
+    vimAlias = true;
+  };
 }

@@ -20,8 +20,6 @@
   programs.localsend.enable = true;
   programs.gpu-screen-recorder.enable = true;
 
-  environment.systemPackages = with pkgs; [ vim ];
-
   hj.packages = with pkgs; [
     spotify
     mpv
