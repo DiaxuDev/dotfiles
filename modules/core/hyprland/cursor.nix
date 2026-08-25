@@ -1,10 +1,17 @@
 { pkgs, ... }:
+let
+  pkg = pkgs.banana-cursor;
+  name = "Banana";
+  size = 40;
+in
 {
   hj = {
-    packages = [ pkgs.banana-cursor ];
+    packages = [ pkg ];
     environment.sessionVariables = {
-      XCURSOR_THEME = "Banana";
-      XCURSOR_SIZE = 40;
+      XCURSOR_THEME = name;
+      XCURSOR_SIZE = size;
     };
+
+    xdg.data.files."icons/${name}".source = "${pkg}/share/icons/${name}";
   };
 }
