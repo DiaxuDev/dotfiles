@@ -14,4 +14,6 @@ in
 
     xdg.data.files."icons/${name}".source = "${pkg}/share/icons/${name}";
   };
+
+  cfg.gtk.cursorTheme = { inherit name size; };
 }
