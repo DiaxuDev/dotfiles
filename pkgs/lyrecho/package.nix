@@ -5,7 +5,7 @@
   installShellFiles,
   fetchFromGitHub,
 }:
-buildGoModule (finalAttrs: {
+buildGoModule {
   pname = "lyrecho";
   version = "1.0.0";
 
@@ -32,4 +32,4 @@ buildGoModule (finalAttrs: {
     license = lib.licenses.unlicense;
     mainProgram = "lyrecho";
   };
-})
+}
