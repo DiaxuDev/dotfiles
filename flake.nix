@@ -23,18 +23,23 @@
       ...
     }:
     let
+      inherit (nixpkgs.lib) genAttrs packagesFromDirectoryRecursive;
+
       systems = [ "x86_64-linux" ];
-      forAllSystems = f: nixpkgs.lib.genAttrs systems (system: f nixpkgs.legacyPackages.${system});
+      forAllSystems = f: genAttrs systems (system: f nixpkgs.legacyPackages.${system});
     in
     {
       nixosConfigurations = import ./hosts inputs;
 
       lib = import ./lib nixpkgs.lib;
 
-      packages = forAllSystems (pkgs: {
-        lyrecho = pkgs.callPackage ./pkgs/lyrecho { };
-        television = pkgs.callPackage ./pkgs/television { };
-      });
+      packages = forAllSystems (
+        pkgs:
+        packagesFromDirectoryRecursive {
+          inherit (pkgs) callPackage; # we can also inherit `newScope` if packages need to refer to each other
+          directory = ./pkgs;
+        }
+      );
 
       formatter = forAllSystems (pkgs: pkgs.nixfmt-tree);
     };
