@@ -10,6 +10,13 @@
     channel.enable = false;
     registry = {
       nixpkgs.flake = inputs.nixpkgs;
+      # Needed for `nix flake init` to work
+      # TODO: make my own templates
+      templates.to = {
+        type = "github";
+        owner = "NixOS";
+        repo = "templates";
+      };
     };
     settings = {
       experimental-features = [
