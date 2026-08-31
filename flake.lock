@@ -1,5 +1,25 @@
 {
   "nodes": {
+    "clin": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1787425116,
+        "narHash": "sha256-sLdYHI5pP/98rAEVx07ay3qQgDY7Es4F2VM9FYxf5kA=",
+        "owner": "reekta92",
+        "repo": "clin-rs",
+        "rev": "43a7161849ea9267c6adc28d4627b1c88498668d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "reekta92",
+        "repo": "clin-rs",
+        "type": "github"
+      }
+    },
     "hjem": {
       "inputs": {
         "nixpkgs": [
@@ -38,6 +58,7 @@
     },
     "root": {
       "inputs": {
+        "clin": "clin",
         "hjem": "hjem",
         "nixpkgs": "nixpkgs",
         "zen-browser": "zen-browser"

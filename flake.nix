@@ -4,9 +4,7 @@
 
     hjem = {
       url = "github:feel-co/hjem";
-      inputs = {
-        nixpkgs.follows = "nixpkgs";
-      };
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     zen-browser = {
@@ -15,6 +13,11 @@
         nixpkgs.follows = "nixpkgs";
         home-manager.follows = "";
       };
+    };
+
+    clin = {
+      url = "github:reekta92/clin-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
   };
   outputs =

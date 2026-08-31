@@ -4,6 +4,7 @@
     ./television
     ./zsh
     ./btop.nix
+    ./clin.nix
     ./direnv.nix
     ./git.nix
     ./starship.nix
