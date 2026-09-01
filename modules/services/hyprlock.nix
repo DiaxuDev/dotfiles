@@ -12,7 +12,7 @@
 
     xdg.config.files."hypr/hyprlock.conf".text =
       let
-        rgb = c: "rgb(${lib.removePrefix "#" config.cfg.meta.colors.${c}})";
+        hex' = c: "0xFF${lib.removePrefix "#" config.cfg.meta.colors.${c}}";
       in
       ''
         $font = JetBrainsMono NF
@@ -38,18 +38,18 @@
         input-field {
           monitor=
           size=300, 60
-          check_color=${rgb "base0B"}
+          check_color=${hex' "base0B"}
           dots_center=false
           dots_size=0.100000
           dots_spacing=0.300000
           fade_on_empty=false
-          fail_color=${rgb "base0F"}
+          fail_color=${hex' "base0F"}
           fail_text=Authentication failed...
-          font_color=${rgb "base06"}
+          font_color=${hex' "base06"}
           font_family=$font
           halign=left
           hide_input=false
-          inner_color=${rgb "base00"}
+          inner_color=${hex' "base00"}
           outline_thickness=2
           placeholder_text=Enter password...
           position=11.5%, 7.5%
@@ -58,7 +58,7 @@
 
         label {
           monitor=
-          color=${rgb "base0B"}
+          color=${hex' "base0B"}
           font_family=$font
           font_size=22
           halign=right
@@ -69,7 +69,7 @@
 
         label {
           monitor=
-          color=${rgb "base0B"}
+          color=${hex' "base0B"}
           font_family=$font
           font_size=65
           halign=right
@@ -80,7 +80,7 @@
 
         label {
           monitor=
-          color=${rgb "base0B"}
+          color=${hex' "base0B"}
           font_family=$font
           font_size=20
           halign=left

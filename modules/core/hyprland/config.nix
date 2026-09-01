@@ -51,15 +51,10 @@ in
         gaps_in = 0;
         gaps_out = 0;
         border_size = 1;
-        col =
-          let
-            inherit (lib) removePrefix;
-            rgb = c: "rgb(${removePrefix "#" config.cfg.meta.colors.${c}})";
-          in
-          {
-            inactive_border = rgb "base03";
-            active_border = rgb "base0B";
-          };
+        col = with config.cfg.meta.colors; {
+          inactive_border = base03;
+          active_border = base0B;
+        };
       };
       animations.enabled = false;
       input = {
