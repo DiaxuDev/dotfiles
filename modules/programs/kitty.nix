@@ -17,6 +17,7 @@
         font_family = "JetBrainsMono NF";
         font_size = 10;
         shell_integration = "enabled";
+        tab_bar_style = "slant";
       }
       // (with config.cfg.meta.colors; {
         foreground = base05;
@@ -25,12 +26,12 @@
         selection_foreground = base00;
         url_color = base04;
         cursor = base05;
-        active_border_color = base03;
-        inactive_border_color = base01;
+        inactive_border_color = base03;
+        active_border_color = base0B;
         active_tab_background = base00;
-        active_tab_foreground = base05;
+        active_tab_foreground = base0B;
         inactive_tab_background = base01;
-        inactive_tab_foreground = base04;
+        inactive_tab_foreground = base05;
         tab_bar_background = base01;
         color0 = base00;
         color1 = base08;
