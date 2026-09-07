@@ -14,7 +14,7 @@ let
   callMenu = lib.callPackageWith (pkgs // { inherit rofiCmd; });
 
   power = callMenu ./power.nix { };
-  screenshot = callMenu ./screenshot.nix { borderColor = config.cfg.meta.colors.base0B; };
+  screenshot = callMenu ./screenshot.nix { borderColor = config.cfg.meta.colors.hex.primary; };
   wallpapers = callMenu ./wallpapers.nix { };
 in
 {

@@ -1,17 +1,17 @@
 { config, ... }:
 let
-  c = config.cfg.meta.colors;
+  c = config.cfg.meta.colors.hex;
 in
 {
   hj.xdg.config.files = {
     "rofi/theme.rasi".text = ''
       * {
-        background: ${c.base00};
-        background-alt: ${c.base01};
-        foreground: ${c.base06};
-        selected: ${c.base0B};
-        border: ${c.base06}1A;
-        urgent: ${c.base0F};
+        background: ${c.bg0};
+        background-alt: ${c.bg1};
+        foreground: ${c.fg2};
+        selected: ${c.primary};
+        border: ${c.fg2}1A;
+        urgent: ${c.red};
       }
 
       /* Main Window */

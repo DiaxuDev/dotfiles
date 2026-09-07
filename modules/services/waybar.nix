@@ -86,7 +86,7 @@
 
     xdg.config.files."waybar/style.css".text =
       let
-        c = config.cfg.meta.colors;
+        c = config.cfg.meta.colors.hex;
       in
       ''
         * {
@@ -100,9 +100,9 @@
         }
 
         window#waybar {
-          background-color: ${c.base00};
+          background-color: ${c.bg0};
           border-radius: 0px;
-          color: ${c.base05};
+          color: ${c.fg2};
         }
 
         window#waybar>box {
@@ -116,17 +116,17 @@
         }
 
         #workspaces button {
-          color: ${c.base0B};
+          color: ${c.primary};
           border-radius: 0;
         }
 
         #workspaces button:hover {
-          color: ${c.base0C};
+          color: ${c.cyan};
           border: 0px solid transparent;
         }
 
         #workspaces button.active {
-          border: 1px solid ${c.base0B};
+          border: 1px solid ${c.primary};
         }
 
         tooltip {
@@ -136,7 +136,7 @@
         #cpu, #memory, #battery {
           margin: 0;
           padding: 0;
-          color: ${c.base0B};
+          color: ${c.primary};
         }
 
         #custom-label-cpu, #custom-label-mem, #custom-label-bat {

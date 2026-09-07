@@ -6,10 +6,10 @@
   ...
 }:
 let
-  c = config.cfg.meta.colors;
+  c = config.cfg.meta.colors.hex;
   urgencyBase = {
-    background = c.base00;
-    foreground = c.base05;
+    background = c.bg0;
+    foreground = c.fg1;
   };
 in
 {
@@ -34,7 +34,7 @@ in
           height = 300;
           offset = "10x15";
           origin = "top-right";
-          frame_color = c.base0B;
+          frame_color = c.primary;
           frame_width = 1;
           notification_limit = 3;
           mouse_left_click = "do_action, close_current";
@@ -52,8 +52,8 @@ in
 
         urgency_critical = urgencyBase // {
           timeout = 0;
-          frame_color = c.base08;
-          highlight = c.base08;
+          frame_color = c.red;
+          highlight = c.red;
         };
       };
     };
