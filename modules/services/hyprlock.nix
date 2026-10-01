@@ -44,7 +44,7 @@
           fade_on_empty=false
           fail_color=${c.red}
           fail_text=Authentication failed...
-          font_color=${c.fg2}
+          font_color=${c.fg1}
           font_family=$font
           halign=left
           hide_input=false

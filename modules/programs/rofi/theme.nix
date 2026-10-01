@@ -8,9 +8,9 @@ in
       * {
         background: ${c.bg0};
         background-alt: ${c.bg1};
-        foreground: ${c.fg2};
+        foreground: ${c.fg1};
         selected: ${c.primary};
-        border: ${c.fg2}1A;
+        border: ${c.fg1}1A;
         urgent: ${c.red};
       }
 

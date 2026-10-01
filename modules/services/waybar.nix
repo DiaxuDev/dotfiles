@@ -102,7 +102,7 @@
         window#waybar {
           background-color: ${c.bg0};
           border-radius: 0px;
-          color: ${c.fg2};
+          color: ${c.fg1};
         }
 
         window#waybar>box {
