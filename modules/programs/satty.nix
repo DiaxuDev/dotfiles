@@ -8,7 +8,7 @@
       value = {
         general = {
           early-exit = true;
-          copy-command = "${lib.getExe' pkgs.wl-clipboard "wl-copy"}";
+          copy-command = lib.getExe' pkgs.wl-clipboard "wl-copy";
         };
       };
     };
