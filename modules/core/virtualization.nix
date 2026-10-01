@@ -32,6 +32,7 @@ in
         };
       };
       networking.firewall.trustedInterfaces = [ "virbr0" ];
+      users.users.${config.cfg.meta.username}.extraGroups = [ "libvirtd" ];
     })
 
     (mkIf cfg.podman.enable {
