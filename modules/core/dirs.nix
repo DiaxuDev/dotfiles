@@ -24,6 +24,8 @@ in
         WINEPREFIX = "${xdg.data.directory}/wine";
         NODE_REPL_HISTORY = "${xdg.data.directory}/node_repl_history";
         _JAVA_OPTIONS = "-Djava.util.prefs.userRoot=${xdg.data.directory}/java";
+        ANDROID_HOME = "${xdg.data.directory}/android";
+        ANDROID_USER_HOME = "${xdg.state.directory}/android";
 
         # DuckDB for some reason allows custom dir only for the history file
         # ~/.duckdbrc and ~/.duckdb/ have to be in the home dir
