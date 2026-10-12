@@ -1,4 +1,4 @@
-{
+{ pkgs, ... }: {
   # I need to limit powerdraw of my gpu to prevent it from blackscreening
   services.lact.enable = true;
 
@@ -16,4 +16,6 @@
     };
     virtualisation.libvirt.enable = true;
   };
+
+  hj.packages = [ pkgs.android-studio ];
 }
