@@ -4,7 +4,7 @@
       "settings": {
         "options": {
           "nixos": {
-            "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.nixos.options",
+            "expr": "(builtins.getFlake (builtins.toString ./.)).nixosConfigurations.roshar.options",
           },
         },
       },
