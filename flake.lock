@@ -7,11 +7,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792794483,
-        "narHash": "sha256-B8pQFGj1jqEEziQu/7aUeYuFZDGa9XS+QTeL9WgcxNQ=",
+        "lastModified": 1792858254,
+        "narHash": "sha256-ou6HF5oHAbxyK088Y3wM5CR26E1w5srU3Vgq8iPJXyk=",
         "owner": "reekta92",
         "repo": "clin-rs",
-        "rev": "8336da337b66c0c22cb9f713f5ceec32875ea323",
+        "rev": "d174f50e345eb579a8ceaa9f9183797903ebfa6e",
         "type": "github"
       },
       "original": {
