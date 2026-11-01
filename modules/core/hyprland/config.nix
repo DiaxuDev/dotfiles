@@ -68,9 +68,6 @@ in
 
     hj.xdg.config.files."hypr/hyprland.lua" = {
       text = ''
-        hl.on("hyprland.start", function() hl.exec_cmd("systemctl --user start hyprland-session.target") end)
-        hl.on("hyprland.shutdown", function() os.execute("systemctl --user stop hyprland-session.target") end)
-
         hl.config(${toLua { } config.cfg.hyprland.settings})
 
         ${concatLines (map (rule: "hl.window_rule(${toLua { } rule})") config.cfg.hyprland.windowRules)}
