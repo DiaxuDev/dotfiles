@@ -22,6 +22,8 @@
       experimental-features = [
         "nix-command"
         "flakes"
+        "auto-allocate-uids"
+        "cgroups"
       ];
 
       auto-optimise-store = true;
@@ -29,6 +31,9 @@
       keep-outputs = true;
       use-xdg-base-directories = true;
       flake-registry = ""; # disable default registry file
+
+      auto-allocate-uids = true;
+      use-cgroups = true;
 
       substituters = [ "https://cache.nixos.org?priority=10" ];
       trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
